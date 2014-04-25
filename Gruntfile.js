@@ -20,6 +20,7 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-bump');
 
     // default task
     grunt.registerTask('default', ['jshint:all']);
