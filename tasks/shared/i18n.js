@@ -31,7 +31,7 @@ module.exports = function (grunt) {
         oxpot: {
             options: {
                 headers: {
-                    'Project-Id-Version': 'shared-grunt-config',
+                    'Project-Id-Version': '<%= pkg.name %>',
                     'PO-Revision-Date': 'DATE',
                     'Last-Translator': 'NAME <EMAIL>',
                     'Language-Team': 'NAME <EMAIL>',
