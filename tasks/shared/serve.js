@@ -22,7 +22,7 @@ module.exports = function (grunt) {
                     var config = grunt.config().local.appserver;
                     if (config.server === '') {
                         grunt.log.error('Server not specified in grunt/local.conf.json');
-                        grunt.log.writeln('Hint: If this is a new setup you may want to copy the file grunt/local.conf.defaults.json to grunt/local.conf.json and change its values according to your setup.');
+                        grunt.log.writeln('Hint: If this is a new setup you may want to run `grunt show-config:local --output grunt/local.conf.json` and change its values according to your setup.');
                         grunt.fail.fatal('Please adjust your local.conf.json');
                     }
 
