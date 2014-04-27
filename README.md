@@ -17,7 +17,7 @@ Then the [build](#build) task will be run, to provide a runnable version of the 
 
 ## dev
 
-This task will start the [MITM (appserver) proxy](#connect) at http://0.0.0.0:8337 and serve the `build/` directory by
+This task will start the [MITM (appserver) proxy](#connect) at http://localhost:8337 and serve the `build/` directory by
 default. It will also start a karma server ready to run the unit tests. It will then start the [watch](#watch)
 task to watch the directory for changes and act on them.
 
