@@ -7,5 +7,6 @@
         "prefixes": ["build/", "build/apps"],
         "manifests": ["build/manifests/"]
     },
-    "debug": false
+    "debug": false,
+    "coreDir": ""
 }
