@@ -69,4 +69,11 @@ http://localhost:9876. It will skip the testrun, if no server is found running.
 
 ## bump
 
+## less
+
+In order to have local less files compiled against a default theme, you
+would need to provide a `coreDir` variable. This can be provided via 
+command line or via a file in `grunt/local.conf.json`. This `coreDir` 
+variable needs to point to a directory containing core less files, like
+a distributed version of the core UI or the core UI repository itself.
 
