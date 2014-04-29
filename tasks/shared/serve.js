@@ -9,6 +9,11 @@
 'use strict';
 
 module.exports = function (grunt) {
+    if (!grunt.isPeerDependencyInstalled('grunt-contrib-connect')) {
+        grunt.verbose.warn('Skipping optional serve/connect tasks');
+        return;
+    }
+
     var appserver = require('appserver');
 
     grunt.config.extend('connect', {

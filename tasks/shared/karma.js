@@ -10,6 +10,11 @@
 
 module.exports = function (grunt) {
 
+    if (!grunt.isPeerDependencyInstalled('grunt-karma')) {
+        grunt.verbose.warn('Skipping karma optional tasks');
+        return;
+    }
+
     grunt.config.extend('karma', {
 
         options: {

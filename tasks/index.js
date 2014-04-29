@@ -9,6 +9,16 @@
 'use strict';
 
 module.exports = function (grunt) {
+
+    grunt.isPeerDependencyInstalled = function (name) {
+        var path = require('path');
+        var root = path.resolve('node_modules');
+        return grunt.file.exists(path.join(root, name, 'package.json'));
+    };
+    if (!grunt.isPeerDependencyInstalled('grunt-check-dependencies')) {
+        grunt.fail.fatal('Essential dependencies missing, try to run `npm install` or at least `npm install --production`');
+    }
+
     var path = require('path');
 
     // make grunt config extendable

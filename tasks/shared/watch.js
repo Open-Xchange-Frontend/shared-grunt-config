@@ -10,6 +10,11 @@
 
 module.exports = function (grunt) {
 
+    if (!grunt.isPeerDependencyInstalled('grunt-contrib-watch')) {
+        grunt.verbose.warn('Skipping optional watch tasks');
+        return;
+    }
+
     var conf = grunt.config().local.appserver;
     var proto = (conf && conf.protocol === 'https') ? 'https' : 'http';
 
