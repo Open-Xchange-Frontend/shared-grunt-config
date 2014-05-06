@@ -26,6 +26,9 @@ module.exports = function (grunt) {
             }]
         },
         local_install_dynamic: {
+            options: {
+                mode: true
+            },
             files: [{
                 expand: true,
                 src: ['**/*'].concat(languages.map(function (Lang) {
@@ -41,6 +44,9 @@ module.exports = function (grunt) {
             }]
         },
         local_install_static: {
+            options: {
+                mode: true
+            },
             files: [{
                 expand: true,
                 src: ['appsuite/**/*', '!appsuite/manifests/**/*'].concat(languages.map(function (Lang) {
