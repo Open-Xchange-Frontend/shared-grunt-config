@@ -5,6 +5,24 @@ It has been part of the [generator-ox-ui-module](https://github.com/Open-Xchange
 help you getting started building own modules using [yo](http://yeoman.io/), but has
 been extracted to be released on its own.
 
+To enable the shared tasks, they need to be loaded in you local `Gruntfile.js`. Our recommended file looks like this:
+
+```
+'use strict';
+
+module.exports = function (grunt) {
+    grunt.loadNpmTasks('shared-grunt-config');
+
+    // load custom tasks
+    // those can be used to override configuration from shared-grunt-config
+    if (grunt.file.isDir('grunt/tasks/')) {
+        grunt.loadTasks('grunt/tasks/');
+    }
+};
+```
+
+The important line is `grunt.loadNpmTasks('shared-grunt-config');`, which will actually load all the shared tasks.
+
 # Tasks
 
 Find here a few tasks that might be useful during development of an Open-Xchange Appsuite UI module.
