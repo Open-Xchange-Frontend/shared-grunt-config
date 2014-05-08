@@ -12,6 +12,10 @@ module.exports = function (grunt) {
     var path = require('path');
     var coreDir = grunt.option('coreDir') || grunt.config('local.coreDir') || '';
 
+    // coreDir needs to be relative to the current working directory, because less doesn't like absolute paths
+    // for @import statements (see http://stackoverflow.com/questions/10715214/lessc-with-an-absolute-path-in-importing)
+    coreDir = path.relative(process.cwd(), coreDir);
+
     //TODO: get rid of coreDir dependency for less files
     //if no coreDir is specified, compile everything for 'default' theme, this can be used
     //with local versions of core definitions.less, mixins.less and style.less.
