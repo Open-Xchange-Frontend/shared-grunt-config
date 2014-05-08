@@ -73,7 +73,8 @@ module.exports = function (grunt) {
                     ],
                     expand: true,
                     rename: function (dest) { return dest; },
-                    dest: 'build/apps/themes/' + themeName + '/common.css'
+                    dest: 'build/apps/themes/' + themeName + '/common.css',
+                    nonull: true
                 },
                 {
                     src: [
