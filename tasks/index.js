@@ -37,7 +37,10 @@ module.exports = function (grunt) {
         return function () {
             var list = [];
 
-            for (var key in grunt.config(main_task)) {
+            //remove 'newer:', because this doesn't belong to the configuration
+            //TODO: may be find a more general way, like a custom 'prefix' parameter
+            //      to prefix the main_task
+            for (var key in grunt.config(main_task.replace('newer:', ''))) {
                 if (key.substr(0, prefix.length) === prefix) {
                     list.push(key);
                 }

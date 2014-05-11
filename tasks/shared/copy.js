@@ -10,8 +10,30 @@
 
 module.exports = function (grunt) {
 
+    //TODO: remove work-around for deprecated tasks
+    grunt.registerTask('newer:copy:apps', function () {
+        grunt.log.warn('DEPRECATED: newer:copy:apps task is deprecated, use newer:copy:build_apps instead!');
+        grunt.log.warn('see Changelog entry for v0.3.0 on https://github.com/Open-Xchange-Frontend/shared-grunt-config/blob/master/README.md')
+        grunt.task.run('newer:copy:build_apps');
+    });
+    grunt.registerTask('newer:copy:themes', function () {
+        grunt.log.warn('DEPRECATED: newer:copy:themes task is deprecated, use newer:copy:build_themes instead!');
+        grunt.log.warn('see Changelog entry for v0.3.0 on https://github.com/Open-Xchange-Frontend/shared-grunt-config/blob/master/README.md')
+        grunt.task.run('newer:copy:build_themes');
+    });
+    grunt.registerTask('copy:apps', function () {
+        grunt.log.warn('DEPRECATED: copy:apps task is deprecated, use copy:build_apps instead!');
+        grunt.log.warn('see Changelog entry for v0.3.0 on https://github.com/Open-Xchange-Frontend/shared-grunt-config/blob/master/README.md')
+        grunt.task.run('copy:build_apps');
+    });
+    grunt.registerTask('copy:themes', function () {
+        grunt.log.warn('DEPRECATED: copy:themes task is deprecated, use copy:build_themes instead!');
+        grunt.log.warn('see Changelog entry for v0.3.0 on https://github.com/Open-Xchange-Frontend/shared-grunt-config/blob/master/README.md')
+        grunt.task.run('copy:build_themes');
+    });
+
     grunt.config.extend('copy', {
-        apps: {
+        build_apps: {
             files: [
                 {
                     src: ['apps/**/*.js'],
@@ -21,7 +43,7 @@ module.exports = function (grunt) {
                 }
             ]
         },
-        themes: {
+        build_themes: {
             files: [
                 {
                     expand: true,
@@ -34,10 +56,7 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('copy_build', [
-        'newer:copy:apps',
-        'newer:copy:themes'
-    ]);
+    grunt.registerTask('copy_build', grunt.util.runPrefixedSubtasksFor('newer:copy', 'build'));
 
     grunt.loadNpmTasks('grunt-contrib-copy');
 };
