@@ -54,7 +54,7 @@ module.exports = function (grunt) {
     };
 
     // custom tasks
-    grunt.registerTask('manifests', ['newer:jsonlint:manifests', 'concat:manifests']);
+    grunt.registerTask('manifests', ['newer:jsonlint', 'concat:manifests']);
     grunt.registerTask('lint', ['newer:jshint:all', 'newer:jsonlint:all']);
 
     // steps to build the ui (ready for development)
