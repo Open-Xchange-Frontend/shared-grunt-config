@@ -48,7 +48,8 @@ module.exports = function (grunt) {
         grunt.task.run(['clean:dist_source', 'checkDependencies:build', 'bower:install']);
         grunt.util.runPrefixedSubtasksFor('copy', 'dependencies')();
         if (grunt.isPeerDependencyInstalled('grunt-contrib-compress') && !grunt.option('no-compress')) {
-            grunt.task.run(['compress:dependencies', 'clean:dist_source']);
+            grunt.util.runPrefixedSubtasksFor('compress', 'dependencies')();
+            grunt.task.run('clean:dist_source');
         } else if (grunt.option('compress') === undefined) {
             grunt.log.warn('grunt-contrib-compress module not installed, will not compress dependencies');
         } else if (grunt.option('compress') === true) {

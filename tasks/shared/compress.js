@@ -8,12 +8,24 @@ module.exports = function (grunt) {
     }
 
     grunt.config.extend('compress', {
-        dependencies: {
+        dependencies_bower: {
             options: {
-                archive: 'dist/dependencies.tar.gz'
+                archive: 'dist/<%= pkg.name %>_<%= pkg.version %>.orig-bower_components.tar.gz'
             },
             files: [{
-                src: ['bower_components/**/*', 'node_modules/**/*']
+                expand: true,
+                cwd: 'dist/source/dependencies/',
+                src: ['bower_components/**/*']
+            }]
+        },
+        dependencies_node: {
+            options: {
+                archive: 'dist/<%= pkg.name %>_<%= pkg.version %>.orig-node_modules.tar.gz'
+            },
+            files: [{
+                expand: true,
+                cwd: 'dist/source/dependencies/',
+                src: ['node_modules/**/*']
             }]
         },
         source: {
