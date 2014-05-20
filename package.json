@@ -1,6 +1,6 @@
 {
   "name": "shared-grunt-config",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "dependencies": {
     "underscore": "^1.6.0",
     "appserver": "^0.1.1"
