@@ -1,5 +1,10 @@
 # Changelog
 
+### v0.3.1
+
+* update appserver to 0.2.0
+    * inject manifests into rampup data of login servlet
+
 ### v0.3.0
 
 * add mode option for install tasks (file mode will stay as is)
