@@ -25,6 +25,18 @@ module.exports = function (grunt) {
                 ],
                 dest: 'dist/<%= pkg.name %>-<%= pkg.version %>/'
             }]
+        },
+        packaging_rpm: {
+            files: [{
+                src: ['<%= pkg.name %>.spec'],
+                dest: 'dist/'
+            }]
+        },
+        packaging_deb: {
+            files: [{
+                src: ['debian/**/*'],
+                dest: 'dist/<%= pkg.name %>-<%= pkg.version %>/'
+            }]
         }
     });
 
@@ -58,5 +70,27 @@ module.exports = function (grunt) {
         } else if (grunt.option('compress') === true) {
             grunt.fail.fatal('grunt-contrib-compress module not installed');
         }
+    });
+
+    if (grunt.isPeerDependencyInstalled('grunt-exec')) {
+        grunt.config.extend('exec', {
+            dpkg_source: {
+                cmd: 'cd dist; dpkg-source -Zgzip -b <%= pkg.name %>-<%= pkg.version %>/; cd ..'
+            }
+        });
+
+        grunt.loadNpmTasks('grunt-exec');
+
+        grunt.registerTask('dist:dpkg-source', 'run dpkg-source to create debian specific packaging information', function () {
+            if (!grunt.isPeerDependencyInstalled('grunt-exec')) {
+                grunt.log.warn('grunt-exec not installed, cannot run dpkg-source');
+                return;
+            }
+            grunt.task.run(['copy:packaging_deb', 'exec:dpkg_source']);
+        });
+    }
+
+    grunt.registerTask('dist:rpm', 'put everything to build an rpm into dist directory', function () {
+        grunt.task.run('copy:packaging_rpm');
     });
 };
