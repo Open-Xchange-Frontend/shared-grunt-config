@@ -14,7 +14,7 @@ module.exports = function (grunt) {
             },
             files: [{
                 expand: true,
-                cwd: 'dist/source/dependencies/',
+                cwd: 'dist/<%= pkg.name %>-<%= pkg.version %>/',
                 src: ['bower_components/**/*']
             }]
         },
@@ -24,7 +24,7 @@ module.exports = function (grunt) {
             },
             files: [{
                 expand: true,
-                cwd: 'dist/source/dependencies/',
+                cwd: 'dist/<%= pkg.name %>-<%= pkg.version %>/',
                 src: ['node_modules/**/*']
             }]
         },
@@ -35,7 +35,7 @@ module.exports = function (grunt) {
             files: [{
                 expand: true,
                 src: ['<%= pkg.name %>-<%= pkg.version %>/**/*', '<%= pkg.name %>-<%= pkg.version %>/**/.*'],
-                cwd: 'dist/source/'
+                cwd: 'dist/'
             }]
         }
     });

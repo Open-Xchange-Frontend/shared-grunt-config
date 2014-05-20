@@ -14,7 +14,7 @@ module.exports = function (grunt) {
 //                     'bower.json',
                     'package.json'
                 ],
-                dest: 'dist/source/<%= pkg.name %>-<%= pkg.version %>/'
+                dest: 'dist/<%= pkg.name %>-<%= pkg.version %>/'
             }]
         },
         dependencies: {
@@ -23,20 +23,24 @@ module.exports = function (grunt) {
                     'node_modules/**/*',
                     'bower_components/**/*'
                 ],
-                dest: 'dist/source/dependencies/'
+                dest: 'dist/<%= pkg.name %>-<%= pkg.version %>/'
             }]
         }
     });
 
     grunt.config.extend('clean', {
-        dist_source: ['dist/source/']
+        dist_source: ['dist/<%= pkg.name %>-<%= pkg.version %>/']
     });
 
     grunt.registerTask('dist:source', 'create a source tarball of the module', function () {
         grunt.task.run('clean:dist_source');
         grunt.util.runPrefixedSubtasksFor('copy', 'source')();
+        if (grunt.option('include-dependencies')) {
+            grunt.task.run(['checkDependencies:build', 'bower:install']);
+            grunt.util.runPrefixedSubtasksFor('copy', 'dependencies')();
+        }
         if (grunt.isPeerDependencyInstalled('grunt-contrib-compress') && !grunt.option('no-compress')) {
-            grunt.task.run(['compress:source', 'clean:dist_source']);
+            grunt.task.run('compress:source');
         } else if (grunt.option('compress') === undefined) {
             grunt.log.warn('grunt-contrib-compress module not installed, will not compress sources');
         } else if (grunt.option('compress') === true) {
@@ -49,7 +53,6 @@ module.exports = function (grunt) {
         grunt.util.runPrefixedSubtasksFor('copy', 'dependencies')();
         if (grunt.isPeerDependencyInstalled('grunt-contrib-compress') && !grunt.option('no-compress')) {
             grunt.util.runPrefixedSubtasksFor('compress', 'dependencies')();
-            grunt.task.run('clean:dist_source');
         } else if (grunt.option('compress') === undefined) {
             grunt.log.warn('grunt-contrib-compress module not installed, will not compress dependencies');
         } else if (grunt.option('compress') === true) {
