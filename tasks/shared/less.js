@@ -73,11 +73,11 @@ module.exports = function (grunt) {
                     ],
                     expand: true,
                     rename: function (dest) { return dest; },
-                    filter: function () {
-                        if (!coreDir) {
+                    filter: function (name) {
+                        if (!grunt.file.exists(name)) {
                             grunt.log.warn('Building local themes without a --coreDir option is not supported, at the moment');
                         }
-                        return coreDir;
+                        return grunt.file.exists(path.join(coreDir, 'apps/themes/style.less'));
                     },
                     dest: 'build/apps/themes/' + themeName + '/common.css',
                     nonull: true
@@ -90,7 +90,8 @@ module.exports = function (grunt) {
                     rename: function (dest) { return dest; },
                     filter: function () {
                         //only generate this file if there is a style.less for this theme
-                        return coreDir && grunt.file.exists('apps/themes/' + themeName + '/style.less');
+                        return grunt.file.exists(path.join(coreDir, 'apps/themes/style.less')) &&
+                               grunt.file.exists('apps/themes/' + themeName + '/style.less');
                     },
                     dest: 'build/apps/themes/' + themeName + '/style.css'
                 },
@@ -100,7 +101,7 @@ module.exports = function (grunt) {
                     ext: '.css',
                     cwd: path.join(coreDir, 'apps/'),
                     filter: function () {
-                        return coreDir;
+                        return grunt.file.exists(path.join(coreDir, 'apps/themes/style.less'));
                     },
                     dest: 'build/apps/themes/' + themeName + '/'
                 },
@@ -110,7 +111,7 @@ module.exports = function (grunt) {
                     ext: '.css',
                     cwd: 'apps/',
                     filter: function () {
-                        return coreDir;
+                        return grunt.file.exists(path.join(coreDir, 'apps/themes/style.less'));
                     },
                     dest: 'build/apps/themes/' + themeName + '/'
                 }
