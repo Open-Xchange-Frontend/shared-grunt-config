@@ -38,6 +38,15 @@ module.exports = function (grunt) {
 
     });
 
+    grunt.config.extend('copy', {
+        specs: {
+            files: [{
+                src: ['spec/**/*'],
+                dest: 'build/'
+            }]
+        }
+    });
+
     // testing stuff
     grunt.registerTask('test', ['karma:unit:start']);
 
@@ -48,7 +57,7 @@ module.exports = function (grunt) {
         var server = net.createServer();
         server.on('error', function () {
             grunt.verbose.writeln('Karma server running, running specs');
-            grunt.task.run('karma:unit:run');
+            grunt.task.run(['newer:copy:specs', 'karma:unit:run']);
             done();
         });
         server.listen(9876, function () {
