@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.4.1
+
+* fix watch task for manifest files
+
 ### v0.4.0
 
 * incompatible changes for less tasks
