@@ -45,6 +45,7 @@ module.exports = function (grunt) {
             strictMath: false,
             strictUnits: false,
             relativeUrls: false,
+            rootpath: 'v=<%= pkg.version %>.' + grunt.template.date(new Date(), 'yyyymmdd.hhMMss') + '/',
             paths: [
                 path.join(coreDir, 'apps/3rd.party/bootstrap/less'),
                 path.join(coreDir, 'apps/3rd.party/font-awesome/less'),
