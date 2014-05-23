@@ -10,7 +10,7 @@
 
 module.exports = function (grunt) {
     var path = require('path');
-    var coreDir = grunt.option('coreDir') || grunt.config('local.coreDir') || '';
+    var coreDir = grunt.option('coreDir') || grunt.config('local.coreDir') || 'build/';
 
     // coreDir needs to be relative to the current working directory, because less doesn't like absolute paths
     // for @import statements (see http://stackoverflow.com/questions/10715214/lessc-with-an-absolute-path-in-importing)
