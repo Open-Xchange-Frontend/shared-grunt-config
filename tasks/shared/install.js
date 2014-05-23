@@ -22,7 +22,7 @@ module.exports = function (grunt) {
                 src: '**/*',
                 cwd: 'build/',
                 filter: 'isFile',
-                dest: grunt.option('dest')
+                dest: grunt.option('dest') || 'no_dest_set/'
             }]
         },
         local_install_dynamic: {
@@ -40,7 +40,7 @@ module.exports = function (grunt) {
                 }),
                 cwd: 'dist/',
                 filter: 'isFile',
-                dest: grunt.option('prefix')
+                dest: grunt.option('prefix') || 'no_prefix_set/'
             }]
         },
         local_install_static: {
@@ -55,7 +55,7 @@ module.exports = function (grunt) {
                 })),
                 cwd: 'dist/',
                 filter: 'isFile',
-                dest: grunt.option('htdoc')
+                dest: grunt.option('htdoc') || 'no_htdoc_set'
             }]
         }
     });
@@ -104,7 +104,7 @@ module.exports = function (grunt) {
                 expand: true,
                 filter: 'isFile',
                 cwd: 'dist/',
-                dest: grunt.option('prefix')
+                dest: grunt.option('prefix') || 'no_prefix_set/'
             }]
         };
 

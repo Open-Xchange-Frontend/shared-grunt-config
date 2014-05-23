@@ -31,6 +31,11 @@ module.exports = function (grunt) {
         grunt.log.warn('see Changelog entry for v0.3.0 on https://github.com/Open-Xchange-Frontend/shared-grunt-config/blob/master/Changelog.md');
         grunt.task.run('copy:build_themes');
     });
+    //prevent people from running copy task on it's own. This should not be done, because local_install tasks rely on some options to be set
+    if ((',' + grunt.cli.tasks.join(',') + ',').indexOf(',copy,') >= 0) {
+        grunt.log.warn('Did you want to run copy_build or copy_dist tasks?');
+        grunt.fail.warn('Don\'t run copy task on its own. This will cause unwanted side-effects with some variables not being set.');
+    };
 
     grunt.config.extend('copy', {
         build_apps: {
