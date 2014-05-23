@@ -39,8 +39,8 @@ module.exports = function (grunt) {
             strictUnits: false,
             relativeUrls: false,
             paths: [
-                'bower_components/bootstrap/less',
-                'bower_components/font-awesome/less',
+                path.join(coreDir, 'apps/3rd.party/bootstrap/less'),
+                path.join(coreDir, 'apps/3rd.party/font-awesome/less'),
                 'lib/appsuite/apps/themes',
                 path.join(coreDir, 'apps/themes'),
                 'apps/themes',
@@ -66,9 +66,9 @@ module.exports = function (grunt) {
             files: [
                 {
                     src: [
-                        'bower_components/bootstrap/less/bootstrap.less',
-                        'bower_components/bootstrap-datepicker/less/datepicker3.less',
-                        'bower_components/font-awesome/less/font-awesome.less',
+                        path.join(coreDir, 'apps/3rd.party/bootstrap/less/bootstrap.less'),
+                        path.join(coreDir, 'apps/3rd.party/bootstrap-datepicker/less/datepicker3.less'),
+                        path.join(coreDir, 'apps/3rd.party/font-awesome/less/font-awesome.less'),
                         path.join(coreDir, 'apps/themes/style.less')
                     ],
                     expand: true,
@@ -96,7 +96,15 @@ module.exports = function (grunt) {
                     dest: 'build/apps/themes/' + themeName + '/style.css'
                 },
                 {
-                    src: ['**/*.less', '!themes/**/*.less', '!themes/*.less'],
+                    src: [
+                        '**/*.less',
+                        '!themes/**/*.less',
+                        '!themes/*.less',
+                        //those are compiled into common.css
+                        '!3rd.party/bootstrap/less/*.less',
+                        '!3rd.party/font-awesome/less/*.less',
+                        '!3rd.party/bootstrap-datepicker/less/*.less'
+                    ],
                     expand: true,
                     ext: '.css',
                     cwd: path.join(coreDir, 'apps/'),
@@ -106,7 +114,15 @@ module.exports = function (grunt) {
                     dest: 'build/apps/themes/' + themeName + '/'
                 },
                 {
-                    src: ['**/*.less', '!themes/**/*.less', '!themes/*.less'],
+                    src: [
+                        '**/*.less',
+                        '!themes/**/*.less',
+                        '!themes/*.less',
+                        //those are compiled into common.css
+                        '!3rd.party/bootstrap/less/*.less',
+                        '!3rd.party/font-awesome/less/*.less',
+                        '!3rd.party/bootstrap-datepicker/less/*.less'
+                    ],
                     expand: true,
                     ext: '.css',
                     cwd: 'apps/',
@@ -126,7 +142,15 @@ module.exports = function (grunt) {
             options: optionsFor(themeName),
             files: [
                 {
-                    src: ['**/*.less', '!themes/**/*.less', '!themes/*.less'],
+                    src: [
+                        '**/*.less',
+                        '!themes/**/*.less',
+                        '!themes/*.less',
+                        //those are compiled into common.css
+                        '!3rd.party/bootstrap/less/*.less',
+                        '!3rd.party/font-awesome/less/*.less',
+                        '!3rd.party/bootstrap-datepicker/less/*.less'
+                    ],
                     expand: true,
                     ext: '.css',
                     cwd: 'apps/',
