@@ -57,6 +57,8 @@ module.exports = function (grunt) {
     grunt.registerTask('manifests', ['newer:jsonlint', 'concat:manifests']);
     grunt.registerTask('lint', ['newer:jshint:all', 'newer:jsonlint:all']);
 
+    // force cache-busting
+    grunt.registerTask('force_update', []);
     // steps to build the ui (ready for development)
     grunt.registerTask('build', ['lint', 'copy_build', 'newer:concat', 'newer:less', 'compile_po']);
     // run development setup
