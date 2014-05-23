@@ -25,7 +25,14 @@ module.exports = function (grunt) {
     ).map(function (file) {
         return file.replace(/\/definitions.less$/, '');
     });
-    var localThemes = grunt.file.expand({cwd: 'apps/themes/'}, '*/definitions.less').map(function (file) {
+    var localThemes = grunt.file.expand({cwd: 'apps/themes/'}, '*/definitions.less').filter(function () {
+        if (!grunt.file.exists(path.join(coreDir, 'apps/themes/style.less'))) {
+            grunt.log.warn('Important file from core directory is missing');
+            grunt.log.warn('Building local themes without a (valid) --coreDir option is not supported, at the moment');
+            return false;
+        }
+        return true;
+    }).map(function (file) {
         return file.replace(/\/definitions.less$/, '');
     });
 
@@ -73,12 +80,6 @@ module.exports = function (grunt) {
                     ],
                     expand: true,
                     rename: function (dest) { return dest; },
-                    filter: function (name) {
-                        if (!grunt.file.exists(name)) {
-                            grunt.log.warn('Building local themes without a (valid) --coreDir option is not supported, at the moment');
-                        }
-                        return grunt.file.exists(path.join(coreDir, 'apps/themes/style.less'));
-                    },
                     dest: 'build/apps/themes/' + themeName + '/common.css',
                     nonull: true
                 },
@@ -90,8 +91,7 @@ module.exports = function (grunt) {
                     rename: function (dest) { return dest; },
                     filter: function () {
                         //only generate this file if there is a style.less for this theme
-                        return grunt.file.exists(path.join(coreDir, 'apps/themes/style.less')) &&
-                               grunt.file.exists('apps/themes/' + themeName + '/style.less');
+                        return grunt.file.exists('apps/themes/' + themeName + '/style.less');
                     },
                     dest: 'build/apps/themes/' + themeName + '/style.css'
                 },
@@ -108,9 +108,6 @@ module.exports = function (grunt) {
                     expand: true,
                     ext: '.css',
                     cwd: path.join(coreDir, 'apps/'),
-                    filter: function () {
-                        return grunt.file.exists(path.join(coreDir, 'apps/themes/style.less'));
-                    },
                     dest: 'build/apps/themes/' + themeName + '/'
                 },
                 {
@@ -126,9 +123,6 @@ module.exports = function (grunt) {
                     expand: true,
                     ext: '.css',
                     cwd: 'apps/',
-                    filter: function () {
-                        return grunt.file.exists(path.join(coreDir, 'apps/themes/style.less'));
-                    },
                     dest: 'build/apps/themes/' + themeName + '/'
                 }
             ]
@@ -162,8 +156,10 @@ module.exports = function (grunt) {
     });
 
     //init empty less config, if no themes detected, this will prevent grunt-newer
-    //from failing
-    grunt.config.extend('less', {});
+    //from failing. If no coreDir is set, it will prevent assemble-less from failing.
+    grunt.config.extend('less', {
+        prevent_no_themes_fail: {}
+    });
 
     grunt.loadNpmTasks('assemble-less');
 };
