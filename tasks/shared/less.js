@@ -75,7 +75,7 @@ module.exports = function (grunt) {
                     rename: function (dest) { return dest; },
                     filter: function (name) {
                         if (!grunt.file.exists(name)) {
-                            grunt.log.warn('Building local themes without a --coreDir option is not supported, at the moment');
+                            grunt.log.warn('Building local themes without a (valid) --coreDir option is not supported, at the moment');
                         }
                         return grunt.file.exists(path.join(coreDir, 'apps/themes/style.less'));
                     },
