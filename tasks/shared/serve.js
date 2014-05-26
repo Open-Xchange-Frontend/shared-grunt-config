@@ -31,7 +31,7 @@ module.exports = function (grunt) {
                         grunt.fail.fatal('Please adjust your local.conf.json');
                     }
 
-                    config.prefixes = (config.prefixes || []).concat([options.base, options.base + '/apps/']);
+                    config.prefixes = (config.prefixes || []).concat(options.base);
                     config.manifests = (config.manifests || []).concat(options.base + '/manifests/');
                     config = appserver.tools.unifyOptions(config);
 
