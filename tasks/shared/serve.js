@@ -15,6 +15,7 @@ module.exports = function (grunt) {
     }
 
     var appserver = require('appserver');
+    var _ = require('underscore');
 
     grunt.config.extend('connect', {
         server: {
@@ -33,6 +34,13 @@ module.exports = function (grunt) {
 
                     config.prefixes = (config.prefixes || []).concat(options.base);
                     config.manifests = (config.manifests || []).concat(options.base + '/manifests/');
+
+                    config.prefixes = _.uniq(config.prefixes);
+                    config.manifests = [].concat.apply(config.manifests, config.prefixes.map(function (prefix) {
+                        return prefix + '/manifests/';
+                    }));
+                    config.manifests = _.uniq(config.manifests);
+
                     config = appserver.tools.unifyOptions(config);
 
                     // Todo: Take care of middlewares by connect
