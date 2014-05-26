@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.4.2
+
+* fix less task not working in core directory
+
 ### v0.4.1
 
 * fix watch task for manifest files
