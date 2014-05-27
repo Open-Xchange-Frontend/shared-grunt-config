@@ -98,7 +98,7 @@ module.exports = function (grunt) {
                 'bower.json',
                 'package.json'
             ],
-            tasks: ['default', 'send_livereload', 'testrun'],
+            tasks: ['default', 'force_update', 'send_livereload', 'testrun'],
             options: {}
         }
     });
