@@ -83,7 +83,7 @@ module.exports = function (grunt) {
     });
 
     // build a distribution ready version of the ui
-    grunt.registerTask('dist:build', ['clean', 'checkDependencies:build', 'bower', 'build', 'uglify', 'copy_dist']);
+    grunt.registerTask('dist:build', ['clean', 'checkDependencies:build', 'bower', 'build', 'copy_dist', 'uglify']);
     //for backwards compatibility:
     grunt.registerTask('dist', 'build a distribution ready version (DEPRECATED, use dist:build)', function () {
         grunt.verbose.warn('Using "dist" task directly has been deprecated, use "dist:build" instead');
