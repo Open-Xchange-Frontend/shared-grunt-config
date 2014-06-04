@@ -65,7 +65,7 @@ module.exports = function (grunt) {
     // steps to build the ui (ready for development)
     grunt.registerTask('build', ['lint', 'copy_build', 'newer:concat', 'newer:less', 'compile_po']);
     // run development setup
-    grunt.registerTask('dev', ['connect', 'test', 'watch']);
+    grunt.registerTask('dev', ['default', 'connect', 'test', 'watch']);
     // run a clean development setup
     grunt.registerTask('cleanDev', ['clean', 'default', 'connect', 'test', 'watch']);
     // default task
