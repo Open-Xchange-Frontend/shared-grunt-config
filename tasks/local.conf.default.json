@@ -4,7 +4,7 @@
         "livereload": true,
         "server": "",
         "verbose": [],
-        "prefixes": ["build/", "build/apps"],
+        "prefixes": ["build/"],
         "manifests": ["build/manifests/"]
     },
     "debug": false,
