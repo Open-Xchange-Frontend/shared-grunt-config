@@ -8,12 +8,15 @@ module.exports = function (grunt) {
                     'lib/**/*',
                     'conf/**/*',
                     'grunt/tasks/*',
+                    'i18n/**/*',
+                    'lib/**/*',
                     'Gruntfile.js',
                     '.jshintrc',
 //TODO: removed bower.json from source package, since grunt dist:build fails with 'git not installed' error, even if bower_components/ is complete
 //                     'bower.json',
                     'package.json'
                 ],
+                dot: true,
                 dest: 'dist/<%= pkg.name %>-<%= pkg.version %>/'
             }]
         },
