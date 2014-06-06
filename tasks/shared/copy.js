@@ -35,7 +35,7 @@ module.exports = function (grunt) {
     if ((',' + grunt.cli.tasks.join(',') + ',').indexOf(',copy,') >= 0) {
         grunt.log.warn('Did you want to run copy_build or copy_dist tasks?');
         grunt.fail.warn('Don\'t run copy task on its own. This will cause unwanted side-effects with some variables not being set.');
-    };
+    }
 
     grunt.config.extend('copy', {
         build_apps: {
