@@ -20,6 +20,7 @@ module.exports = function (grunt) {
             files: [{
                 expand: true,
                 src: '**/*',
+                dot: true,
                 cwd: 'build/',
                 filter: 'isFile',
                 dest: grunt.option('dest') || 'no_dest_set/'
@@ -38,6 +39,7 @@ module.exports = function (grunt) {
                 })).filter(function (Lang) {
                     return Lang.length > 0;
                 }),
+                dot: true,
                 cwd: 'dist/',
                 filter: 'isFile',
                 dest: grunt.option('prefix') || 'no_prefix_set/'
@@ -53,6 +55,7 @@ module.exports = function (grunt) {
                     //ignore language files for static packages
                     return '!**/*.' + Lang + '.js';
                 })),
+                dot: true,
                 cwd: 'dist/',
                 filter: 'isFile',
                 dest: grunt.option('htdoc') || 'no_htdoc_set'
