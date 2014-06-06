@@ -6,7 +6,7 @@ module.exports = function (grunt) {
                 src: [
                     'apps/**/*',
                     'lib/**/*',
-                    'config/**/*',
+                    'conf/**/*',
                     'grunt/tasks/*',
                     'Gruntfile.js',
                     '.jshintrc',
