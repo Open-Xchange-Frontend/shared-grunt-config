@@ -1,5 +1,15 @@
 # Changelog
 
+### v0.5.0
+
+* improvements in serve task configuration
+    * unneeded path removed
+    * look for manifests directory in all prefix directories by default
+* feature: force_update task: use new appserver feature to set latest build timestamp
+* run copy_dist before uglify task, so copy_dist will not overwrite any generated files
+* add default task to dev task (this will build the module before running the dev tasks)
+* fixes for dist:source task
+
 ### v0.4.2
 
 * fix less task not working in core directory
