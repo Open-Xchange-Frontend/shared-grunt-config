@@ -41,6 +41,7 @@ module.exports = function (grunt) {
     grunt.config.extend('copy', {
         specs: {
             files: [{
+                expand: true,
                 src: ['spec/**/*'],
                 dest: 'build/'
             }]
