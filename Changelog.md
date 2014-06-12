@@ -1,5 +1,10 @@
 # Changelog
 
+### v0.5.1
+
+* fix minor issues in less task
+* fix issue with newer:copy:specs not copying files
+
 ### v0.5.0
 
 * improvements in serve task configuration
