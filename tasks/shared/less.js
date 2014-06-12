@@ -20,7 +20,7 @@ module.exports = function (grunt) {
     //if no coreDir is specified, compile everything for 'default' theme, this can be used
     //with local versions of core definitions.less, mixins.less and style.less.
     //Just place those files in lib/appsuite/apps/themes/
-    var coreThemes = (coreDir ?
+    var coreThemes = (coreDir.indexOf('../') === 0 ?
         grunt.file.expand({cwd: path.join(coreDir, 'apps/themes/')}, '*/definitions.less') : []
     ).map(function (file) {
         return file.replace(/\/definitions.less$/, '');
@@ -159,9 +159,11 @@ module.exports = function (grunt) {
 
     //init empty less config, if no themes detected, this will prevent grunt-newer
     //from failing. If no coreDir is set, it will prevent assemble-less from failing.
-    grunt.config.extend('less', {
-        prevent_no_themes_fail: {}
-    });
+    if (!grunt.config('less')) {
+        grunt.config.extend('less', {
+            prevent_no_themes_fail: {}
+        });
+    }
 
     grunt.loadNpmTasks('assemble-less');
 };
