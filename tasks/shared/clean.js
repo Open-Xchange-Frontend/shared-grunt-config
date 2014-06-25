@@ -10,7 +10,7 @@
 
 module.exports = function (grunt) {
 
-    grunt.config.extend('clean', ['build/', 'node_modules/grunt-newer/.cache', 'tmp/', 'dist/']);
+    grunt.config.extend('clean', ['build/', 'node_modules/grunt-newer/.cache', 'tmp/', 'dist/', 'node_modules/grunt-require-gettext/.cache']);
 
     grunt.loadNpmTasks('grunt-contrib-clean');
 };
