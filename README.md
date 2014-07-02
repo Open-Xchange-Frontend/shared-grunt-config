@@ -101,3 +101,10 @@ command line or via a file in `grunt/local.conf.json`. This `coreDir`
 variable needs to point to a directory containing core less files, like
 a distributed version of the core UI or the core UI repository itself.
 
+## msgmerge
+
+Perform a msgmerge operation in the `i18n/` directory. This will merge all
+changes from the pot file in the `i18n/` directory into all po files found.
+
+This task requires `grunt-exec` and gettext tools to be installed on the system.
+
