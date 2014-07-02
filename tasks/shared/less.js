@@ -20,7 +20,7 @@ module.exports = function (grunt) {
     //if no coreDir is specified, compile everything for 'default' theme, this can be used
     //with local versions of core definitions.less, mixins.less and style.less.
     //Just place those files in lib/appsuite/apps/themes/
-    var coreThemes = (coreDir.indexOf('../') === 0 ?
+    var coreThemes = (/^\.\.[/\\].+/.test(coreDir) ?
         grunt.file.expand({cwd: path.join(coreDir, 'apps/themes/')}, '*/definitions.less') : []
     ).map(function (file) {
         return file.replace(/\/definitions.less$/, '');
