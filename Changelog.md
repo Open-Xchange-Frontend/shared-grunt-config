@@ -1,5 +1,10 @@
 # Changelog
 
+### v0.5.2
+
+* fix issue with coreThemes detection on windows
+* add grunt-require-gettext cache dir to clean task
+
 ### v0.5.1
 
 * fix minor issues in less task
