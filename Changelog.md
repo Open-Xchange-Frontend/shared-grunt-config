@@ -1,5 +1,10 @@
 # Changelog
 
+### v0.5.3
+
+* expose appserver and coreDir local configuration to karma targets
+    * used for more easy testing with new karma-ox-ui module
+
 ### v0.5.2
 
 * fix issue with coreThemes detection on windows
