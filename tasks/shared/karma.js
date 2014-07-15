@@ -19,7 +19,9 @@ module.exports = function (grunt) {
 
         options: {
             configFile: 'karma.conf.js',
-            builddir: 'build/'
+            builddir: 'build/',
+            appserver: grunt.config('local.appserver'),
+            coreDir: grunt.config('local.coreDir')
         },
         unit: {
             background: true,
