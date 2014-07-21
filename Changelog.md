@@ -1,5 +1,15 @@
 # Changelog
 
+### v0.6.0
+
+* update grunt-require-gettext to latest version
+    * brings features and new bug-fixes
+* new msgmerge task
+    * merge pot file with all po files in `i18n/` directory
+* better support for local packaging
+* more documentation
+* deprecate grunt.config.extend, switch to grunt.config.merge (native grunt API)
+
 ### v0.5.3
 
 * expose appserver and coreDir local configuration to karma targets
