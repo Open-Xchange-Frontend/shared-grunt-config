@@ -83,6 +83,10 @@ http://localhost:9876. It will skip the testrun, if no server is found running.
 
 ## dist
 
+Create a distribution ready version in the `dist/` directory. Everything from this directory can later on
+be copied over to a prefix directory and will be served correctly from there. So this directory contains
+the final directory structure that just needs to be copied over to the destination.
+
 ## clean
 
 ## install:dist
@@ -92,6 +96,8 @@ http://localhost:9876. It will skip the testrun, if no server is found running.
 ## install:dynamic
 
 ## bump
+
+Use [grunt-bump](https://github.com/vojtajina/grunt-bump) to manage versioning of the project.
 
 ## less
 
