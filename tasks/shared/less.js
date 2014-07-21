@@ -129,7 +129,9 @@ module.exports = function (grunt) {
                 }
             ]
         };
-        grunt.config.extend('less', theme);
+        grunt.config.merge({
+            less: theme
+        });
     });
 
     coreThemes.forEach(function (themeName) {
@@ -154,14 +156,18 @@ module.exports = function (grunt) {
                 }
             ]
         };
-        grunt.config.extend('less', theme);
+        grunt.config.merge({
+            less: theme
+        });
     });
 
     //init empty less config, if no themes detected, this will prevent grunt-newer
     //from failing. If no coreDir is set, it will prevent assemble-less from failing.
     if (!grunt.config('less')) {
-        grunt.config.extend('less', {
-            prevent_no_themes_fail: {}
+        grunt.config.merge({
+            less: {
+                prevent_no_themes_fail: {}
+            }
         });
     }
 

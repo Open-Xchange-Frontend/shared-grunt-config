@@ -66,40 +66,41 @@ module.exports = function (grunt) {
         req.end();
     });
 
-    grunt.config.extend('watch', {
-
-        options: {
-            interval: 500,
-            interrupt: true,
-            debounceDelay: 500
-        },
-        manifests: {
-            files: 'apps/**/manifest.json',
-            tasks: ['manifests', 'force_update', 'send_livereload'],
-            options: {}
-        },
-        karma: {
-            files: ['spec/**/*.js'],
-            tasks: ['newer:jshint:specs', 'testrun']
-        },
-        configs: {
-            options: { reload: true },
-            files: [
-                'Gruntfile.js',
-                'grunt/tasks/*.js'
-            ],
-            tasks: ['default']
-        },
-        all: {
-            files: [
-                'apps/**/*.{js,less}',
-                'src/*',
-                'lib/**/*.js',
-                'bower.json',
-                'package.json'
-            ],
-            tasks: ['default', 'force_update', 'send_livereload', 'testrun'],
-            options: {}
+    grunt.config.merge({
+        watch: {
+            options: {
+                interval: 500,
+                interrupt: true,
+                debounceDelay: 500
+            },
+            manifests: {
+                files: 'apps/**/manifest.json',
+                tasks: ['manifests', 'force_update', 'send_livereload'],
+                options: {}
+            },
+            karma: {
+                files: ['spec/**/*.js'],
+                tasks: ['newer:jshint:specs', 'testrun']
+            },
+            configs: {
+                options: { reload: true },
+                files: [
+                    'Gruntfile.js',
+                    'grunt/tasks/*.js'
+                ],
+                tasks: ['default']
+            },
+            all: {
+                files: [
+                    'apps/**/*.{js,less}',
+                    'src/*',
+                    'lib/**/*.js',
+                    'bower.json',
+                    'package.json'
+                ],
+                tasks: ['default', 'force_update', 'send_livereload', 'testrun'],
+                options: {}
+            }
         }
     });
 

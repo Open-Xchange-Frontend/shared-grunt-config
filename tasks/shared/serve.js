@@ -17,41 +17,43 @@ module.exports = function (grunt) {
     var appserver = require('appserver');
     var _ = require('underscore');
 
-    grunt.config.extend('connect', {
-        server: {
-            options: {
-                port: 8337,
-                protocol: grunt.config('local.appserver.protocol') || 'http',
-                base: ['build/'],
-                livereload: grunt.config('local.appserver.livereload') || true,
-                middleware: function (connect, options, middlewares) {
-                    var config = grunt.config().local.appserver;
-                    if (config.server === '') {
-                        grunt.log.error('Server not specified in grunt/local.conf.json');
-                        grunt.log.writeln('Hint: If this is a new setup you may want to run `grunt show-config:local --output grunt/local.conf.json` and change its values according to your setup.');
-                        grunt.fail.fatal('Please adjust your local.conf.json');
+    grunt.config.merge({
+        connect: {
+            server: {
+                options: {
+                    port: 8337,
+                    protocol: grunt.config('local.appserver.protocol') || 'http',
+                    base: ['build/'],
+                    livereload: grunt.config('local.appserver.livereload') || true,
+                    middleware: function (connect, options, middlewares) {
+                        var config = grunt.config().local.appserver;
+                        if (config.server === '') {
+                            grunt.log.error('Server not specified in grunt/local.conf.json');
+                            grunt.log.writeln('Hint: If this is a new setup you may want to run `grunt show-config:local --output grunt/local.conf.json` and change its values according to your setup.');
+                            grunt.fail.fatal('Please adjust your local.conf.json');
+                        }
+
+                        config.prefixes = (config.prefixes || []).concat(options.base);
+                        config.manifests = (config.manifests || []).concat(options.base + '/manifests/');
+
+                        config.prefixes = _.uniq(config.prefixes);
+                        config.manifests = [].concat.apply(config.manifests, config.prefixes.map(function (prefix) {
+                            return prefix + '/manifests/';
+                        }));
+                        config.manifests = _.uniq(config.manifests);
+
+                        config = appserver.tools.unifyOptions(config);
+
+                        // Todo: Take care of middlewares by connect
+                        middlewares = [];
+
+                        middlewares.push(appserver.middleware.appsload(config));
+                        middlewares.push(appserver.middleware.manifests(config));
+                        middlewares.push(appserver.middleware.login(config));
+                        middlewares.push(appserver.middleware.localfiles(config));
+                        middlewares.push(appserver.middleware.proxy(config));
+                        return middlewares;
                     }
-
-                    config.prefixes = (config.prefixes || []).concat(options.base);
-                    config.manifests = (config.manifests || []).concat(options.base + '/manifests/');
-
-                    config.prefixes = _.uniq(config.prefixes);
-                    config.manifests = [].concat.apply(config.manifests, config.prefixes.map(function (prefix) {
-                        return prefix + '/manifests/';
-                    }));
-                    config.manifests = _.uniq(config.manifests);
-
-                    config = appserver.tools.unifyOptions(config);
-
-                    // Todo: Take care of middlewares by connect
-                    middlewares = [];
-
-                    middlewares.push(appserver.middleware.appsload(config));
-                    middlewares.push(appserver.middleware.manifests(config));
-                    middlewares.push(appserver.middleware.login(config));
-                    middlewares.push(appserver.middleware.localfiles(config));
-                    middlewares.push(appserver.middleware.proxy(config));
-                    return middlewares;
                 }
             }
         }

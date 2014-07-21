@@ -10,11 +10,11 @@
 
 module.exports = function (grunt) {
 
-    grunt.config.extend('bower', {
-
-        options: { copy: false },
-        install: {}
-
+    grunt.config.merge({
+        bower: {
+            options: { copy: false },
+            install: {}
+        }
     });
 
     grunt.loadNpmTasks('grunt-bower-task');

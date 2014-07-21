@@ -10,12 +10,12 @@
 
 module.exports = function (grunt) {
 
-    grunt.config.extend('jsonlint', {
-
-        all: {
-            src: ['apps/**/*.json']
+    grunt.config.merge({
+        jsonlint: {
+            all: {
+                src: ['apps/**/*.json']
+            }
         }
-
     });
 
     grunt.loadNpmTasks('grunt-jsonlint');

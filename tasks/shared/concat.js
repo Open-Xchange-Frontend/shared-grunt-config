@@ -10,52 +10,54 @@
 
 module.exports = function (grunt) {
 
-    grunt.config.extend('concat', {
-        manifests: {
-            options: {
-                banner: '[',
-                footer: ']',
-                separator: ',',
-                process: function (rawData, filepath) {
-                    var manifest = [],
-                        data = JSON.parse(rawData),
-                        prefix = /^apps[\\\/](.*)[\\\/]manifest\.json$/.exec(filepath)[1].replace(/\\/g, '/') + '/';
-                    if (data && (data.constructor !== Array)) data = [data];
-                    for (var i = 0; i < data.length; i++) {
-                        if (!data[i].path) {
-                            if (data[i].namespace) {
-                                // Assume Plugin
-                                if (grunt.file.exists('apps/' + prefix + 'register.js')) data[i].path = prefix + 'register';
-                            } else {
-                                // Assume App
-                                if (grunt.file.exists('apps/' + prefix + 'main.js')) data[i].path = prefix + 'main';
+    grunt.config.merge({
+        concat: {
+            manifests: {
+                options: {
+                    banner: '[',
+                    footer: ']',
+                    separator: ',',
+                    process: function (rawData, filepath) {
+                        var manifest = [],
+                            data = JSON.parse(rawData),
+                            prefix = /^apps[\\\/](.*)[\\\/]manifest\.json$/.exec(filepath)[1].replace(/\\/g, '/') + '/';
+                        if (data && (data.constructor !== Array)) data = [data];
+                        for (var i = 0; i < data.length; i++) {
+                            if (!data[i].path) {
+                                if (data[i].namespace) {
+                                    // Assume Plugin
+                                    if (grunt.file.exists('apps/' + prefix + 'register.js')) data[i].path = prefix + 'register';
+                                } else {
+                                    // Assume App
+                                    if (grunt.file.exists('apps/' + prefix + 'main.js')) data[i].path = prefix + 'main';
+                                }
                             }
+                            manifest.push(data[i]);
                         }
-                        manifest.push(data[i]);
-                    }
-                    return manifest.map(JSON.stringify);
-                },
-            },
-            files: [
-                {
-                    expand: true,
-                    src: ['apps/**/manifest.json'],
-                    rename: function (dest, file) {
-                        var data = JSON.parse(grunt.file.read(file)),
-                            packageName = [].concat(data).map(function (obj) {
-                                return obj.package;
-                            }).reduce(function (acc, name) {
-                                name = name || grunt.config('pkg').name;
-                                //ignore the initial value of acc
-                                if (!acc) return name;
-                                if (acc !== name) grunt.fail.warn('Multiple package targets per manifest.json are not supported any longer. Create a manifest.json for each package.');
-                                return name;
-                            }, null);
-                        return dest + packageName + '.json';
+                        return manifest.map(JSON.stringify);
                     },
-                    dest: 'build/manifests/',
-                }
-            ]
+                },
+                files: [
+                    {
+                        expand: true,
+                        src: ['apps/**/manifest.json'],
+                        rename: function (dest, file) {
+                            var data = JSON.parse(grunt.file.read(file)),
+                                packageName = [].concat(data).map(function (obj) {
+                                    return obj.package;
+                                }).reduce(function (acc, name) {
+                                    name = name || grunt.config('pkg').name;
+                                    //ignore the initial value of acc
+                                    if (!acc) return name;
+                                    if (acc !== name) grunt.fail.warn('Multiple package targets per manifest.json are not supported any longer. Create a manifest.json for each package.');
+                                    return name;
+                                }, null);
+                            return dest + packageName + '.json';
+                        },
+                        dest: 'build/manifests/',
+                    }
+                ]
+            }
         }
     });
 

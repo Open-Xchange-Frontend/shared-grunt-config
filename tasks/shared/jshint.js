@@ -10,18 +10,18 @@
 
 module.exports = function (grunt) {
 
-    grunt.config.extend('jshint', {
-
-        options: {
-            jshintrc: true
-        },
-        specs: {
-            src: ['spec/**/*_spec.js']
-        },
-        all: {
-            src: ['Gruntfile.js', 'grunt/tasks/*.js', 'apps/**/*.js']
+    grunt.config.merge({
+        jshint: {
+            options: {
+                jshintrc: true
+            },
+            specs: {
+                src: ['spec/**/*_spec.js']
+            },
+            all: {
+                src: ['Gruntfile.js', 'grunt/tasks/*.js', 'apps/**/*.js']
+            }
         }
-
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');

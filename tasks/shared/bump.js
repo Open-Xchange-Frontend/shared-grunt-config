@@ -9,12 +9,14 @@
 'use strict';
 
 module.exports = function (grunt) {
-    grunt.config.extend('bump', {
-        options: {
-            files: ['package.json'],
-            commit: false,
-            createTag: false,
-            push: false
+    grunt.config.merge({
+        bump: {
+            options: {
+                files: ['package.json'],
+                commit: false,
+                createTag: false,
+                push: false
+            }
         }
     });
 

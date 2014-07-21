@@ -37,27 +37,29 @@ module.exports = function (grunt) {
         grunt.fail.warn('Don\'t run copy task on its own. This will cause unwanted side-effects with some variables not being set.');
     }
 
-    grunt.config.extend('copy', {
-        build_apps: {
-            files: [
-                {
-                    src: ['apps/**/*.js'],
-                    expand: true,
-                    filter: 'isFile',
-                    dest: 'build/'
-                }
-            ]
-        },
-        build_themes: {
-            files: [
-                {
-                    expand: true,
-                    src: ['**/*.{png,gif,ico,less,css}'],
-                    cwd: 'apps/',
-                    dest: 'build/apps/',
-                    filter: 'isFile'
-                }
-            ]
+    grunt.config.merge({
+        copy: {
+            build_apps: {
+                files: [
+                    {
+                        src: ['apps/**/*.js'],
+                        expand: true,
+                        filter: 'isFile',
+                        dest: 'build/'
+                    }
+                ]
+            },
+            build_themes: {
+                files: [
+                    {
+                        expand: true,
+                        src: ['**/*.{png,gif,ico,less,css}'],
+                        cwd: 'apps/',
+                        dest: 'build/apps/',
+                        filter: 'isFile'
+                    }
+                ]
+            }
         }
     });
 

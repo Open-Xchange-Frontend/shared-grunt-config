@@ -23,6 +23,7 @@ module.exports = function (grunt) {
 
     // make grunt config extendable
     grunt.config.extend = function (k, v) {
+        grunt.log.warn('grunt.config.extend is deprecated, use grunt.config.merge instead');
         grunt.config(k, require('underscore').extend({}, grunt.config(k), v));
     };
 

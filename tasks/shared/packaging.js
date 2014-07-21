@@ -6,13 +6,15 @@ module.exports = function (grunt) {
 
     var sign_options = grunt.option('no-sign') === true ? ' -us -uc': '';
 
-    grunt.config.extend('exec', {
-        dpkg_build: {
-            cmd: 'dpkg-buildpackage -b' + sign_options,
-            cwd: 'dist/<%= pkg.name %>-<%= pkg.version %>/'
-        },
-        rpmbuild: {
-            cmd: 'cp dist/*.orig.tar.* ~/rpmbuild/SOURCES/; cp dist/*.spec ~/rpmbuild/SOURCES; rpmbuild -bb dist/<%= pkg.name %>.spec'
+    grunt.config.merge({
+        exec: {
+            dpkg_build: {
+                cmd: 'dpkg-buildpackage -b' + sign_options,
+                cwd: 'dist/<%= pkg.name %>-<%= pkg.version %>/'
+            },
+            rpmbuild: {
+                cmd: 'cp dist/*.orig.tar.* ~/rpmbuild/SOURCES/; cp dist/*.spec ~/rpmbuild/SOURCES; rpmbuild -bb dist/<%= pkg.name %>.spec'
+            }
         }
     });
 

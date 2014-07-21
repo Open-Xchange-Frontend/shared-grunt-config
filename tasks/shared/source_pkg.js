@@ -1,49 +1,53 @@
 'use strict';
 module.exports = function (grunt) {
-    grunt.config.extend('copy', {
-        source: {
-            files: [{
-                src: [
-                    'apps/**/*',
-                    'lib/**/*',
-                    'conf/**/*',
-                    'grunt/tasks/*',
-                    'i18n/**/*',
-                    'lib/**/*',
-                    'Gruntfile.js',
-                    '.jshintrc',
-                    'bower.json',
-                    'package.json'
-                ],
-                dot: true,
-                dest: 'dist/<%= pkg.name %>-<%= pkg.version %>/'
-            }]
-        },
-        dependencies: {
-            files: [{
-                src: [
-                    'node_modules/**/*',
-                    'bower_components/**/*'
-                ],
-                dest: 'dist/<%= pkg.name %>-<%= pkg.version %>/'
-            }]
-        },
-        packaging_rpm: {
-            files: [{
-                src: ['<%= pkg.name %>.spec'],
-                dest: 'dist/'
-            }]
-        },
-        packaging_deb: {
-            files: [{
-                src: ['debian/**/*'],
-                dest: 'dist/<%= pkg.name %>-<%= pkg.version %>/'
-            }]
+    grunt.config.merge({
+        copy: {
+            source: {
+                files: [{
+                    src: [
+                        'apps/**/*',
+                        'lib/**/*',
+                        'conf/**/*',
+                        'grunt/tasks/*',
+                        'i18n/**/*',
+                        'lib/**/*',
+                        'Gruntfile.js',
+                        '.jshintrc',
+                        'bower.json',
+                        'package.json'
+                    ],
+                    dot: true,
+                    dest: 'dist/<%= pkg.name %>-<%= pkg.version %>/'
+                }]
+            },
+            dependencies: {
+                files: [{
+                    src: [
+                        'node_modules/**/*',
+                        'bower_components/**/*'
+                    ],
+                    dest: 'dist/<%= pkg.name %>-<%= pkg.version %>/'
+                }]
+            },
+            packaging_rpm: {
+                files: [{
+                    src: ['<%= pkg.name %>.spec'],
+                    dest: 'dist/'
+                }]
+            },
+            packaging_deb: {
+                files: [{
+                    src: ['debian/**/*'],
+                    dest: 'dist/<%= pkg.name %>-<%= pkg.version %>/'
+                }]
+            }
         }
     });
 
-    grunt.config.extend('clean', {
-        dist_source: ['dist/<%= pkg.name %>-<%= pkg.version %>/']
+    grunt.config.merge({
+        clean: {
+            dist_source: ['dist/<%= pkg.name %>-<%= pkg.version %>/']
+        }
     });
 
     grunt.registerTask('dist:source', 'create a source tarball of the module', function () {
@@ -75,10 +79,12 @@ module.exports = function (grunt) {
     });
 
     if (grunt.isPeerDependencyInstalled('grunt-exec')) {
-        grunt.config.extend('exec', {
-            dpkg_source: {
-                cmd: 'dpkg-source -Zgzip -b <%= pkg.name %>-<%= pkg.version %>/',
-                cwd: 'dist/'
+        grunt.config.merge({
+            exec: {
+                dpkg_source: {
+                    cmd: 'dpkg-source -Zgzip -b <%= pkg.name %>-<%= pkg.version %>/',
+                    cwd: 'dist/'
+                }
             }
         });
 

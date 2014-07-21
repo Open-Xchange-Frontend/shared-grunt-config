@@ -15,38 +15,40 @@ module.exports = function (grunt) {
         return;
     }
 
-    grunt.config.extend('karma', {
-
-        options: {
-            configFile: 'karma.conf.js',
-            builddir: 'build/',
-            appserver: grunt.config('local.appserver'),
-            coreDir: grunt.config('local.coreDir')
-        },
-        unit: {
-            background: true,
-            autoWatch: false
-        },
-        serve: {
-            backgrount: false,
-            autoWatch: false
-        },
-        //continuous integration mode: run tests once in PhantomJS browser.
-        continuous: {
-            singleRun: true,
-            browsers: ['PhantomJS'],
-            reporters: ['junit']
+    grunt.config.merge({
+        karma: {
+            options: {
+                configFile: 'karma.conf.js',
+                builddir: 'build/',
+                appserver: grunt.config('local.appserver'),
+                coreDir: grunt.config('local.coreDir')
+            },
+            unit: {
+                background: true,
+                autoWatch: false
+            },
+            serve: {
+                backgrount: false,
+                autoWatch: false
+            },
+            //continuous integration mode: run tests once in PhantomJS browser.
+            continuous: {
+                singleRun: true,
+                browsers: ['PhantomJS'],
+                reporters: ['junit']
+            }
         }
-
     });
 
-    grunt.config.extend('copy', {
-        specs: {
-            files: [{
-                expand: true,
-                src: ['spec/**/*'],
-                dest: 'build/'
-            }]
+    grunt.config.merge({
+        copy: {
+            specs: {
+                files: [{
+                    expand: true,
+                    src: ['spec/**/*'],
+                    dest: 'build/'
+                }]
+            }
         }
     });
 

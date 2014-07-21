@@ -10,7 +10,7 @@
     "grunt-contrib-jshint": "^0.10.0"
   },
   "peerDependencies": {
-    "grunt": "^0.4.4",
+    "grunt": "^0.4.5",
     "assemble-less": "^0.7.0",
     "grunt-bower-task": "^0.3.4",
     "grunt-check-dependencies": "^0.3.1",

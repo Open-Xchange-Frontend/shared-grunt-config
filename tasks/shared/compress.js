@@ -7,36 +7,38 @@ module.exports = function (grunt) {
         return;
     }
 
-    grunt.config.extend('compress', {
-        dependencies_bower: {
-            options: {
-                archive: 'dist/<%= pkg.name %>_<%= pkg.version %>.orig-bower_components.tar.gz'
+    grunt.config.merge({
+        compress: {
+            dependencies_bower: {
+                options: {
+                    archive: 'dist/<%= pkg.name %>_<%= pkg.version %>.orig-bower_components.tar.gz'
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'dist/<%= pkg.name %>-<%= pkg.version %>/',
+                    src: ['bower_components/**/*']
+                }]
             },
-            files: [{
-                expand: true,
-                cwd: 'dist/<%= pkg.name %>-<%= pkg.version %>/',
-                src: ['bower_components/**/*']
-            }]
-        },
-        dependencies_node: {
-            options: {
-                archive: 'dist/<%= pkg.name %>_<%= pkg.version %>.orig-node_modules.tar.gz'
+            dependencies_node: {
+                options: {
+                    archive: 'dist/<%= pkg.name %>_<%= pkg.version %>.orig-node_modules.tar.gz'
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'dist/<%= pkg.name %>-<%= pkg.version %>/',
+                    src: ['node_modules/**/*']
+                }]
             },
-            files: [{
-                expand: true,
-                cwd: 'dist/<%= pkg.name %>-<%= pkg.version %>/',
-                src: ['node_modules/**/*']
-            }]
-        },
-        source: {
-            options: {
-                archive: 'dist/<%= pkg.name %>_<%= pkg.version %>.orig.tar.gz'
-            },
-            files: [{
-                expand: true,
-                src: ['<%= pkg.name %>-<%= pkg.version %>/**/*', '<%= pkg.name %>-<%= pkg.version %>/**/.*'],
-                cwd: 'dist/'
-            }]
+            source: {
+                options: {
+                    archive: 'dist/<%= pkg.name %>_<%= pkg.version %>.orig.tar.gz'
+                },
+                files: [{
+                    expand: true,
+                    src: ['<%= pkg.name %>-<%= pkg.version %>/**/*', '<%= pkg.name %>-<%= pkg.version %>/**/.*'],
+                    cwd: 'dist/'
+                }]
+            }
         }
     });
 

@@ -36,49 +36,53 @@ module.exports = function (grunt) {
         return _(languages).contains(languagePart);
     }
 
-    grunt.config.extend('copy', {
-        dist: {
-            files: [
-                {
-                    expand: true,
-                    src: ['apps/**/*', 'manifests/**/*', '*', '!*.js'],
-                    cwd: 'build/',
-                    dest: 'dist/appsuite/'
-                },
-                {
-                    expand: true,
-                    src: ['**/*'],
-                    cwd: 'conf/',
-                    dest: 'dist/etc/'
-                }
-            ]
+    grunt.config.merge({
+        copy: {
+            dist: {
+                files: [
+                    {
+                        expand: true,
+                        src: ['apps/**/*', 'manifests/**/*', '*', '!*.js'],
+                        cwd: 'build/',
+                        dest: 'dist/appsuite/'
+                    },
+                    {
+                        expand: true,
+                        src: ['**/*'],
+                        cwd: 'conf/',
+                        dest: 'dist/etc/'
+                    }
+                ]
+            }
         }
     });
 
     grunt.registerTask('copy_dist', grunt.util.runPrefixedSubtasksFor('copy', 'dist'));
 
-    grunt.config.extend('uglify', {
-        dist: {
-            files: [{
-                src: ['apps/**/*.js'],
-                cwd: 'build/',
-                dest: 'dist/appsuite/',
-                filter: function (f) {
-                    return !isTranslationModule(f) && grunt.file.isFile(f);
-                },
-                expand: true
-            }]
-        },
-        dist_i18n: {
-            files: [
-                {
-                    expand: true,
+    grunt.config.merge({
+        uglify: {
+            dist: {
+                files: [{
                     src: ['apps/**/*.js'],
                     cwd: 'build/',
                     dest: 'dist/appsuite/',
-                    filter: isPackagedTranslationModule
-                }
-            ]
+                    filter: function (f) {
+                        return !isTranslationModule(f) && grunt.file.isFile(f);
+                    },
+                    expand: true
+                }]
+            },
+            dist_i18n: {
+                files: [
+                    {
+                        expand: true,
+                        src: ['apps/**/*.js'],
+                        cwd: 'build/',
+                        dest: 'dist/appsuite/',
+                        filter: isPackagedTranslationModule
+                    }
+                ]
+            }
         }
     });
 

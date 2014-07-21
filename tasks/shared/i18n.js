@@ -12,40 +12,40 @@ module.exports = function (grunt) {
 
     var path = require('path');
 
-    grunt.config.extend('compile_po', {
-
-        i18n: {
-            options: {
-                template: path.join(path.dirname(__filename), '../templates/i18n_module.js.tpl')
-            },
-            files: [{
-                src: ['i18n/*.po'],
-                dest: 'build/apps/'
-            }]
+    grunt.config.merge({
+        compile_po: {
+            i18n: {
+                options: {
+                    template: path.join(path.dirname(__filename), '../templates/i18n_module.js.tpl')
+                },
+                files: [{
+                    src: ['i18n/*.po'],
+                    dest: 'build/apps/'
+                }]
+            }
         }
-
     });
 
-    grunt.config.extend('create_pot', {
-
-        oxpot: {
-            options: {
-                headers: {
-                    'Project-Id-Version': '<%= pkg.name %>',
-                    'PO-Revision-Date': 'DATE',
-                    'Last-Translator': 'NAME <EMAIL>',
-                    'Language-Team': 'NAME <EMAIL>',
-                    'MIME-Version': '1.0',
-                    'Content-Type': 'text/plain; charset=UTF-8',
-                    'Content-Transfer-Encoding': '8bit',
-                    'Plural-Forms': 'nplurals=INTEGER; plural=EXPRESSION;'
-                }
-            },
-            files: {
-                'i18n/ox.pot': ['apps/**/*.js'],
-            },
+    grunt.config.merge({
+        create_pot: {
+            oxpot: {
+                options: {
+                    headers: {
+                        'Project-Id-Version': '<%= pkg.name %>',
+                        'PO-Revision-Date': 'DATE',
+                        'Last-Translator': 'NAME <EMAIL>',
+                        'Language-Team': 'NAME <EMAIL>',
+                        'MIME-Version': '1.0',
+                        'Content-Type': 'text/plain; charset=UTF-8',
+                        'Content-Transfer-Encoding': '8bit',
+                        'Plural-Forms': 'nplurals=INTEGER; plural=EXPRESSION;'
+                    }
+                },
+                files: {
+                    'i18n/ox.pot': ['apps/**/*.js'],
+                },
+            }
         }
-
     });
 
     grunt.loadNpmTasks('grunt-require-gettext');

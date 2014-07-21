@@ -15,51 +15,53 @@ module.exports = function (grunt) {
     });
 
     // Copy build version or dist version into some arbitrary directory
-    grunt.config.extend('copy', {
-        local_install_build: {
-            files: [{
-                expand: true,
-                src: '**/*',
-                dot: true,
-                cwd: 'build/',
-                filter: 'isFile',
-                dest: grunt.option('dest') || 'no_dest_set/'
-            }]
-        },
-        local_install_dynamic: {
-            options: {
-                mode: true
+    grunt.config.merge({
+        copy: {
+            local_install_build: {
+                files: [{
+                    expand: true,
+                    src: '**/*',
+                    dot: true,
+                    cwd: 'build/',
+                    filter: 'isFile',
+                    dest: grunt.option('dest') || 'no_dest_set/'
+                }]
             },
-            files: [{
-                expand: true,
-                src: ['**/*'].concat(languages.map(function (Lang) {
-                    //return '' in case --no-languages is used, so language files
-                    //will also be copied by this task
-                    return grunt.option('no-languages') || false ? '!**/*.' + Lang + '.js' : '';
-                })).filter(function (Lang) {
-                    return Lang.length > 0;
-                }),
-                dot: true,
-                cwd: 'dist/',
-                filter: 'isFile',
-                dest: grunt.option('prefix') || 'no_prefix_set/'
-            }]
-        },
-        local_install_static: {
-            options: {
-                mode: true
+            local_install_dynamic: {
+                options: {
+                    mode: true
+                },
+                files: [{
+                    expand: true,
+                    src: ['**/*'].concat(languages.map(function (Lang) {
+                        //return '' in case --no-languages is used, so language files
+                        //will also be copied by this task
+                        return grunt.option('no-languages') || false ? '!**/*.' + Lang + '.js' : '';
+                    })).filter(function (Lang) {
+                        return Lang.length > 0;
+                    }),
+                    dot: true,
+                    cwd: 'dist/',
+                    filter: 'isFile',
+                    dest: grunt.option('prefix') || 'no_prefix_set/'
+                }]
             },
-            files: [{
-                expand: true,
-                src: ['appsuite/**/*', '!appsuite/manifests/**/*'].concat(languages.map(function (Lang) {
-                    //ignore language files for static packages
-                    return '!**/*.' + Lang + '.js';
-                })),
-                dot: true,
-                cwd: 'dist/',
-                filter: 'isFile',
-                dest: grunt.option('htdoc') || 'no_htdoc_set'
-            }]
+            local_install_static: {
+                options: {
+                    mode: true
+                },
+                files: [{
+                    expand: true,
+                    src: ['appsuite/**/*', '!appsuite/manifests/**/*'].concat(languages.map(function (Lang) {
+                        //ignore language files for static packages
+                        return '!**/*.' + Lang + '.js';
+                    })),
+                    dot: true,
+                    cwd: 'dist/',
+                    filter: 'isFile',
+                    dest: grunt.option('htdoc') || 'no_htdoc_set'
+                }]
+            }
         }
     });
 
@@ -111,7 +113,9 @@ module.exports = function (grunt) {
             }]
         };
 
-        grunt.config.extend('copy', config);
+        grunt.config.merge({
+            copy: config
+        });
         grunt.registerTask('install:' + Lang, 'install language directory into a custom location', function () {
             if (!grunt.option('prefix')) {
                 grunt.fail.fatal('Need --prefix option to be set');

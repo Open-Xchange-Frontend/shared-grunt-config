@@ -46,14 +46,16 @@ module.exports = function (grunt) {
         include(shouldInclude);
     }
 
-    grunt.config.extend('newer', {
-        options: {
-            override: function (detail, include) {
-                if (detail.task === 'less') {
-                    // call include with `true` if there are newer imports
-                    checkForNewerImports(detail.path, detail.time, detail.target, include);
-                } else {
-                    include(false);
+    grunt.config.merge({
+        newer: {
+            options: {
+                override: function (detail, include) {
+                    if (detail.task === 'less') {
+                        // call include with `true` if there are newer imports
+                        checkForNewerImports(detail.path, detail.time, detail.target, include);
+                    } else {
+                        include(false);
+                    }
                 }
             }
         }
