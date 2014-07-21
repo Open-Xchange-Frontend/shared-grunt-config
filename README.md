@@ -58,6 +58,12 @@ If some grunt configuration changes, grunt will reload itself.
 If some files in the `spec/` directory changes, those will be copied to the `build/` directory and a [test run](#testrun)
 will be initiated.
 
+## refresh
+
+Force a reload of the UI (incl. cache busting) in a browser that has a connection to a running livereload server.
+This helps during development, if `grunt dev` is used (or at least the watch task is running). A call to
+`grunt refresh` will then reload the browser window with the latest code served by the connect middleware.
+
 ## serve
 
 Run the [connect](#connect) task but wait for ever after the server has been started. Use this to run a MITM proxy

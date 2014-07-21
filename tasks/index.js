@@ -70,6 +70,8 @@ module.exports = function (grunt) {
     grunt.registerTask('cleanDev', ['clean', 'default', 'connect', 'test', 'watch']);
     // default task
     grunt.registerTask('default', ['checkDependencies:dev', 'bower', 'build']);
+    // refresh the browser if watch task (with livereload) is running
+    grunt.registerTask('refresh', 'force an update and reload the broweser', ['force_update', 'send_livereload']);
 
     // load pre-configured grunt tasks
     grunt.loadTasks(path.join(path.dirname(__filename), 'shared'));
