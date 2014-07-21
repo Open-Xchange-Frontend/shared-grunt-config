@@ -12,8 +12,7 @@ module.exports = function (grunt) {
                     'lib/**/*',
                     'Gruntfile.js',
                     '.jshintrc',
-//TODO: removed bower.json from source package, since grunt dist:build fails with 'git not installed' error, even if bower_components/ is complete
-//                     'bower.json',
+                    'bower.json',
                     'package.json'
                 ],
                 dot: true,
@@ -78,7 +77,8 @@ module.exports = function (grunt) {
     if (grunt.isPeerDependencyInstalled('grunt-exec')) {
         grunt.config.extend('exec', {
             dpkg_source: {
-                cmd: 'cd dist; dpkg-source -Zgzip -b <%= pkg.name %>-<%= pkg.version %>/; cd ..'
+                cmd: 'dpkg-source -Zgzip -b <%= pkg.name %>-<%= pkg.version %>/',
+                cwd: 'dist/'
             }
         });
 
