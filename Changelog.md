@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.6.1
+
+* update grunt-bower-task to latest version (0.4.0)
+
 ### v0.6.0
 
 * update grunt-require-gettext to latest version

@@ -1,6 +1,6 @@
 {
   "name": "shared-grunt-config",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "dependencies": {
     "underscore": "^1.6.0",
     "appserver": "^0.3.0"
@@ -12,7 +12,7 @@
   "peerDependencies": {
     "grunt": "^0.4.5",
     "assemble-less": "^0.7.0",
-    "grunt-bower-task": "^0.3.4",
+    "grunt-bower-task": "^0.4.0",
     "grunt-check-dependencies": "^0.3.1",
     "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-uglify": "^0.4.0",
