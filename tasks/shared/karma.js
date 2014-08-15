@@ -66,8 +66,9 @@ module.exports = function (grunt) {
             done();
         });
         server.listen(9876, function () {
-            grunt.verbose.warn('No karma server running, skipping specs');
+            grunt.verbose.warn('No karma server running, running specs in continuous integration mode');
             server.close();
+            grunt.task.run(['newer:copy:specs', 'karma:continuous']);
             done();
         });
 
