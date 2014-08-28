@@ -1,5 +1,13 @@
 # Changelog
 
+### v0.6.2
+
+* update grunt-check-dependencies to latest version (0.6.0)
+* update grunt-contrib-clean to latest version (0.6.0)
+* update grunt-contrib-uglify to latest version (0.5.1)
+* update grunt-contrib-concat to latest version (0.5.0)
+* extend testrun task to always run tests
+
 ### v0.6.1
 
 * update grunt-bower-task to latest version (0.4.0)
