@@ -56,6 +56,10 @@ module.exports = function (grunt) {
     grunt.registerTask('test', ['karma:unit:start']);
 
     grunt.registerTask('testrun', 'Run the tests, if test server is running', function () {
+        if (!grunt.file.exists('karma.conf.js')) {
+            grunt.verbose.warn('Skipping tests, because karma is not configured');
+            return;
+        }
         var done = this.async();
 
         var net = require('net');
