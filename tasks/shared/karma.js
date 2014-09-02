@@ -15,14 +15,16 @@ module.exports = function (grunt) {
         return;
     }
 
+    var _ = require('underscore');
+
     grunt.config.merge({
         karma: {
-            options: {
+            options: _.extend({
                 configFile: 'karma.conf.js',
                 builddir: 'build/',
                 appserver: grunt.config('local.appserver'),
                 coreDir: grunt.config('local.coreDir')
-            },
+            }, grunt.config('local.karma')),
             unit: {
                 background: true,
                 autoWatch: false
@@ -56,7 +58,7 @@ module.exports = function (grunt) {
     grunt.registerTask('test', ['karma:unit:start']);
 
     grunt.registerTask('testrun', 'Run the tests, if test server is running', function () {
-        if (!grunt.file.exists('karma.conf.js')) {
+        if (!grunt.file.exists(grunt.config('karma.options.configFile'))) {
             grunt.verbose.warn('Skipping tests, because karma is not configured');
             return;
         }
