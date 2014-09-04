@@ -1,5 +1,11 @@
 # Changelog
 
+### v0.6.3
+
+* fix minor issue with testrun and no karma configured (will not fail any longer)
+* hidden feature: it is now possible to extend karma configuration via grunt/local.conf.json
+* be more strict with copy:dist and uglify configuration: only write final js files once.
+
 ### v0.6.2
 
 * update grunt-check-dependencies to latest version (0.6.0)
