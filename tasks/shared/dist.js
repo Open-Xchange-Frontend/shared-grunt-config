@@ -42,7 +42,7 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        src: ['apps/**/*', 'manifests/**/*', '*', '!*.js'],
+                        src: ['apps/**/*', 'manifests/**/*', '*'],
                         cwd: 'build/',
                         dest: 'dist/appsuite/'
                     },
@@ -50,7 +50,10 @@ module.exports = function (grunt) {
                         expand: true,
                         src: ['**/*'],
                         cwd: 'conf/',
-                        dest: 'dist/etc/'
+                        dest: 'dist/etc/',
+                        filter: function (file) {
+                            return !(/.*[^\.min]\.js/.test(file));
+                        }
                     }
                 ]
             }
@@ -63,7 +66,7 @@ module.exports = function (grunt) {
         uglify: {
             dist: {
                 files: [{
-                    src: ['apps/**/*.js'],
+                    src: ['**/*.js', '!**/*.min.js'],
                     cwd: 'build/',
                     dest: 'dist/appsuite/',
                     filter: function (f) {
