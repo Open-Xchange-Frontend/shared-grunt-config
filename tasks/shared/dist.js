@@ -44,16 +44,17 @@ module.exports = function (grunt) {
                         expand: true,
                         src: ['apps/**/*', 'manifests/**/*', '*'],
                         cwd: 'build/',
-                        dest: 'dist/appsuite/'
+                        dest: 'dist/appsuite/',
+                        filter: function (file) {
+                            return !(/.*[^\.min]\.js/.test(file));
+                        }
+
                     },
                     {
                         expand: true,
                         src: ['**/*'],
                         cwd: 'conf/',
-                        dest: 'dist/etc/',
-                        filter: function (file) {
-                            return !(/.*[^\.min]\.js/.test(file));
-                        }
+                        dest: 'dist/etc/'
                     }
                 ]
             }
