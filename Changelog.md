@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.6.4
+
+* fix issue with some (json) files not being copied
+
 ### v0.6.3
 
 * fix minor issue with testrun and no karma configured (will not fail any longer)
