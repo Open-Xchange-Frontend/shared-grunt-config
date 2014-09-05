@@ -46,7 +46,7 @@ module.exports = function (grunt) {
                         cwd: 'build/',
                         dest: 'dist/appsuite/',
                         filter: function (file) {
-                            return !(/.*[^\.min]\.js/.test(file));
+                            return !(/.*[^\.min]\.js$/.test(file));
                         }
 
                     },
