@@ -42,21 +42,11 @@ module.exports = function (grunt) {
             build_apps: {
                 files: [
                     {
-                        src: ['apps/**/*.js'],
+                        src: ['apps/**/*.*'],
                         expand: true,
                         filter: 'isFile',
-                        dest: 'build/'
-                    }
-                ]
-            },
-            build_themes: {
-                files: [
-                    {
-                        expand: true,
-                        src: ['**/*.{png,gif,ico,less,css}'],
-                        cwd: 'apps/',
-                        dest: 'build/apps/',
-                        filter: 'isFile'
+                        dest: 'build/',
+                        dot: true
                     }
                 ]
             }
