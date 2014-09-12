@@ -42,7 +42,18 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        src: ['apps/**/*', 'manifests/**/*', '*'],
+                        src: ['manifests/**/*', '*'],
+                        cwd: 'build/',
+                        dest: 'dist/appsuite/',
+                        filter: function (file) {
+                            return !(/.*[^\.min]\.js$/.test(file));
+                        }
+
+                    },
+                    {
+                        expand: true,
+                        src: ['apps/**/*'],
+                        dot: true,
                         cwd: 'build/',
                         dest: 'dist/appsuite/',
                         filter: function (file) {
