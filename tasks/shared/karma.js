@@ -55,7 +55,13 @@ module.exports = function (grunt) {
     });
 
     // testing stuff
-    grunt.registerTask('test', ['karma:unit:start']);
+    grunt.registerTask('test', 'Run karma server, if configured', function () {
+        if (!grunt.file.exists(grunt.config('karma.options.configFile'))) {
+            grunt.verbose.warn('Skipping tests, because karma is not configured');
+            return;
+        }
+        grunt.task.run(['karma:unit:start']);
+    });
 
     grunt.registerTask('testrun', 'Run the tests, if test server is running', function () {
         if (!grunt.file.exists(grunt.config('karma.options.configFile'))) {
@@ -72,9 +78,9 @@ module.exports = function (grunt) {
             done();
         });
         server.listen(9876, function () {
-            grunt.verbose.warn('No karma server running, running specs in continuous integration mode');
+            grunt.verbose.warn('No karma server running, skipping specs ');
             server.close();
-            grunt.task.run(['newer:copy:specs', 'karma:continuous']);
+            grunt.task.run(['newer:copy:specs']);
             done();
         });
 
