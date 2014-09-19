@@ -56,6 +56,9 @@ module.exports = function (grunt) {
 
     // testing stuff
     grunt.registerTask('test', 'Run karma server, if configured', function () {
+        if (grunt.option('tests') === false) {
+            return;
+        }
         if (!grunt.file.exists(grunt.config('karma.options.configFile'))) {
             grunt.verbose.warn('Skipping tests, because karma is not configured');
             return;
