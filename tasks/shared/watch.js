@@ -86,7 +86,8 @@ module.exports = function (grunt) {
                 options: { reload: true },
                 files: [
                     'Gruntfile.js',
-                    'grunt/tasks/*.js'
+                    'grunt/tasks/*.js',
+                    'grunt/local.conf.json'
                 ],
                 tasks: ['default']
             },
