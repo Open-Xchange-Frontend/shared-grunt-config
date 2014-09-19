@@ -1,5 +1,15 @@
 # Changelog
 
+### v0.7.0
+
+* prepared everything to publish this config also through npm registry
+* changed behaviour:
+    - removed white-list for files copied from apps/ to build/apps/
+    - **all** files from apps/ are now copied to build/apps/
+    - running tests: remove recently introduced “always run tests” behaviour, again
+    - running tests: optionally disable testserver for dev task (use --no-tests)
+* minor: add `grunt/local.conf.json` to watched files
+
 ### v0.6.4
 
 * fix issue with some (json) files not being copied
