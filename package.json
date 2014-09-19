@@ -1,5 +1,5 @@
 {
-  "name": "shared-grunt-config",
+  "name": "open-xchange-shared-grunt-config",
   "version": "0.6.4",
   "dependencies": {
     "underscore": "^1.6.0",
