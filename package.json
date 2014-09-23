@@ -1,6 +1,10 @@
 {
   "name": "open-xchange-shared-grunt-config",
   "version": "0.7.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Open-Xchange-Frontend/shared-grunt-config.git"
+  },
   "dependencies": {
     "underscore": "^1.6.0",
     "appserver": "^0.3.0"
