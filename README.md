@@ -5,13 +5,23 @@ It has been part of the [generator-ox-ui-module](https://github.com/Open-Xchange
 help you getting started building own modules using [yo](http://yeoman.io/), but has
 been extracted to be released on its own.
 
-To enable the shared tasks, they need to be loaded in you local `Gruntfile.js`. Our recommended file looks like this:
+If you used yo to generate a stub project, you are already setup and ready to use all the goodness.
+
+To manually enable the shared tasks, they need to be loaded in you local `Gruntfile.js`. For this to work, you need to
+
+```
+npm install --save-dev open-xchange-shared-grunt-config
+```
+
+This will add the shared configuration as a dependency to your project and install it.
+
+Our recommended `Gruntfile.js` looks like this:
 
 ```
 'use strict';
 
 module.exports = function (grunt) {
-    grunt.loadNpmTasks('shared-grunt-config');
+    grunt.loadNpmTasks('open-xchange-shared-grunt-config');
 
     // load custom tasks
     // those can be used to override configuration from shared-grunt-config
@@ -21,7 +31,7 @@ module.exports = function (grunt) {
 };
 ```
 
-The important line is `grunt.loadNpmTasks('shared-grunt-config');`, which will actually load all the shared tasks.
+The important line is `grunt.loadNpmTasks('open-xchange-shared-grunt-config');`, which will actually load all the shared tasks.
 
 # Tasks
 
