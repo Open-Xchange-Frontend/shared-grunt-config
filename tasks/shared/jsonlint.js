@@ -14,6 +14,9 @@ module.exports = function (grunt) {
         jsonlint: {
             all: {
                 src: ['apps/**/*.json']
+            },
+            specs: {
+                src: ['spec/**/*.json']
             }
         }
     });
