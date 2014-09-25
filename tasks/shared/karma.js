@@ -54,6 +54,8 @@ module.exports = function (grunt) {
         }
     });
 
+    grunt.registerTask('lint:specs', ['newer:jshint:specs', 'newer:jsonlint:specs']);
+
     // testing stuff
     grunt.registerTask('test', 'Run karma server, if configured', function () {
         if (grunt.option('tests') === false) {
