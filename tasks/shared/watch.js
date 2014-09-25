@@ -80,7 +80,7 @@ module.exports = function (grunt) {
             },
             karma: {
                 files: ['spec/**/*.js'],
-                tasks: ['newer:jshint:specs', 'testrun']
+                tasks: ['lint:specs', 'testrun']
             },
             configs: {
                 options: { reload: true },
