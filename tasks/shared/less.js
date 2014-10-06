@@ -102,10 +102,8 @@ module.exports = function (grunt) {
                         '**/*.less',
                         '!themes/**/*.less',
                         '!themes/*.less',
-                        //those are compiled into common.css
-                        '!3rd.party/bootstrap/less/*.less',
-                        '!3rd.party/font-awesome/less/*.less',
-                        '!3rd.party/bootstrap-datepicker/less/*.less'
+                        //ignore third party less files
+                        '!3rd.party/**/*.less'
                     ],
                     expand: true,
                     ext: '.css',
@@ -116,11 +114,7 @@ module.exports = function (grunt) {
                     src: [
                         '**/*.less',
                         '!themes/**/*.less',
-                        '!themes/*.less',
-                        //those are compiled into common.css
-                        '!3rd.party/bootstrap/less/*.less',
-                        '!3rd.party/font-awesome/less/*.less',
-                        '!3rd.party/bootstrap-datepicker/less/*.less'
+                        '!themes/*.less'
                     ],
                     expand: true,
                     ext: '.css',
@@ -143,11 +137,7 @@ module.exports = function (grunt) {
                     src: [
                         '**/*.less',
                         '!themes/**/*.less',
-                        '!themes/*.less',
-                        //those are compiled into common.css
-                        '!3rd.party/bootstrap/less/*.less',
-                        '!3rd.party/font-awesome/less/*.less',
-                        '!3rd.party/bootstrap-datepicker/less/*.less'
+                        '!themes/*.less'
                     ],
                     expand: true,
                     ext: '.css',
