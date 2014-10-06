@@ -42,8 +42,8 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    'i18n/ox.pot': ['apps/**/*.js'],
-                },
+                    'i18n/ox.pot': ['apps/**/*.js']
+                }
             }
         }
     });

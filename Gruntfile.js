@@ -11,6 +11,14 @@ module.exports = function (grunt) {
                 src: ['Gruntfile.js', 'tasks/**/*.js']
             }
         },
+        jscs: {
+            options: {
+                config: '.jscs.json'
+            },
+            all: {
+                src: ['Gruntfile.js', 'tasks/**/*.js']
+            }
+        },
         bump: {
             options: {
                 files: ['package.json'],
@@ -21,8 +29,9 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-jscs');
     grunt.loadNpmTasks('grunt-bump');
 
     // default task
-    grunt.registerTask('default', ['jshint:all']);
+    grunt.registerTask('default', ['jshint:all', 'jscs:all']);
 };

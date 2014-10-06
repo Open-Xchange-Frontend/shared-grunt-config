@@ -21,11 +21,11 @@ module.exports = function (grunt) {
     //with local versions of core definitions.less, mixins.less and style.less.
     //Just place those files in lib/appsuite/apps/themes/
     var coreThemes = (/^\.\.[/\\].+/.test(coreDir) ?
-        grunt.file.expand({cwd: path.join(coreDir, 'apps/themes/')}, '*/definitions.less') : []
+        grunt.file.expand({ cwd: path.join(coreDir, 'apps/themes/') }, '*/definitions.less') : []
     ).map(function (file) {
         return file.replace(/\/definitions.less$/, '');
     });
-    var localThemes = grunt.file.expand({cwd: 'apps/themes/'}, '*/definitions.less').filter(function () {
+    var localThemes = grunt.file.expand({ cwd: 'apps/themes/' }, '*/definitions.less').filter(function () {
         if (!grunt.file.exists(path.join(coreDir, 'apps/themes/style.less')) &&
             !grunt.file.exists('apps/themes/style.less') /* actually this is the coreDir, most likely */) {
             grunt.log.warn('Important file from core directory is missing');
@@ -52,7 +52,7 @@ module.exports = function (grunt) {
                 path.join(coreDir, 'apps/3rd.party/font-awesome/less'),
                 'lib/appsuite/apps/themes',
                 path.join(coreDir, 'apps/themes'),
-                'apps/themes',
+                'apps/themes'
             ],
             imports: {
                 reference: [

@@ -35,7 +35,7 @@ module.exports = function (grunt) {
                             manifest.push(data[i]);
                         }
                         return manifest.map(JSON.stringify);
-                    },
+                    }
                 },
                 files: [
                     {
@@ -54,7 +54,7 @@ module.exports = function (grunt) {
                                 }, null);
                             return dest + packageName + '.json';
                         },
-                        dest: 'build/manifests/',
+                        dest: 'build/manifests/'
                     }
                 ]
             }

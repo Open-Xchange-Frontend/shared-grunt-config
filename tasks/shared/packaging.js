@@ -4,7 +4,7 @@ module.exports = function (grunt) {
         return;
     }
 
-    var sign_options = grunt.option('no-sign') === true ? ' -us -uc': '';
+    var sign_options = grunt.option('no-sign') === true ? ' -us -uc' : '';
 
     grunt.config.merge({
         exec: {
@@ -24,7 +24,7 @@ module.exports = function (grunt) {
         grunt.task.run(['dist:source', 'dist:dpkg-source', 'exec:dpkg_build']);
     });
 
-   grunt.registerTask('rpm-build', 'create installable rpm packages based on all packaging information', function () {
+    grunt.registerTask('rpm-build', 'create installable rpm packages based on all packaging information', function () {
         grunt.task.run(['dist:source', 'dist:rpm', 'exec:rpmbuild']);
     });
 };

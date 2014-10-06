@@ -17,7 +17,7 @@ module.exports = function (grunt) {
                 grunt.fatal(task + ' does not have any configurations');
             }
         }
-	target = grunt.option('output');
+        target = grunt.option('output');
         if (target) {
             grunt.log.writeln('Config written to file:', target);
             grunt.file.write(target, JSON.stringify(configObject, null, 4));

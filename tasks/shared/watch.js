@@ -62,7 +62,7 @@ module.exports = function (grunt) {
             grunt.log.warn('Could not send livereload:', err);
             done();
         });
-        req.write(JSON.stringify({files: ['boot.js']}));
+        req.write(JSON.stringify({ files: ['boot.js'] }));
         req.end();
     });
 
