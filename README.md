@@ -1,5 +1,7 @@
 # Shared Open-Xchange Appsuite UI module grunt configuration
 
+[![Build Status](https://travis-ci.org/Open-Xchange-Frontend/shared-grunt-config.svg)](https://travis-ci.org/Open-Xchange-Frontend/shared-grunt-config)
+
 This shared configuration can be used to develop modules for the Open-Xchange Appsuite UI.
 It has been part of the [generator-ox-ui-module](https://github.com/Open-Xchange-Frontend/generator-ox-ui-module) project, that can
 help you getting started building own modules using [yo](http://yeoman.io/), but has
