@@ -1,5 +1,13 @@
 # Changelog
 
+### v0.8.0
+
+* version bump of grunt-require-gettext -> more stable handling of po files
+* add configuration for jscs
+    * not active by default, but possible to enable it easily
+* add jsonlint task for spec/ directory -> lint your fixture files
+* documentation cleanup
+
 ### v0.7.0
 
 * prepared everything to publish this config also through npm registry
