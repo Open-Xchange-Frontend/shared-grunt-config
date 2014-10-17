@@ -1,5 +1,11 @@
 # Changelog
 
+### v0.9.0
+
+* update appserver to latest version
+    * adds the option to provide a custom index file
+    * adds /ui as another way to start AppSuite (new in version 7.8.0)
+
 ### v0.8.0
 
 * version bump of grunt-require-gettext -> more stable handling of po files
