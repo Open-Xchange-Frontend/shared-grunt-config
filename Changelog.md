@@ -1,5 +1,10 @@
 # Changelog
 
+### v0.10.0
+
+* cleanup [peerD|d]ependencies
+    * in "production" mode, this should lead to faster builds (due to reduced dependencies)
+
 ### v0.9.0
 
 * update appserver to latest version
