@@ -38,6 +38,18 @@ module.exports = function (grunt) {
                     src: ['<%= pkg.name %>-<%= pkg.version %>/**/*', '<%= pkg.name %>-<%= pkg.version %>/**/.*'],
                     cwd: 'dist/'
                 }]
+            },
+            dist: {
+                options: {
+                    archive: '<%= pkg.name %>-<%= pkg.version %>.tar.gz'
+                },
+                files: [{
+                    expand: true,
+                    src: ['**/*'],
+                    dot: true,
+                    filter: 'isFile',
+                    cwd: 'dist/'
+                }]
             }
         }
     });
