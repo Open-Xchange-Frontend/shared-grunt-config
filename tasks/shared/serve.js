@@ -9,7 +9,9 @@
 'use strict';
 
 module.exports = function (grunt) {
-    if (!grunt.isPeerDependencyInstalled('grunt-contrib-connect')) {
+    if (!grunt.isPeerDependencyInstalled('grunt-contrib-connect') || !grunt.isPeerDependencyInstalled('appserver')) {
+        grunt.verbose.warn('Missing optional dependencies:', 'grunt-contrib-connect', 'appserver');
+        grunt.verbose.warn('You might want to install those using npm with --save-dev option for your project.');
         grunt.verbose.warn('Skipping optional serve/connect tasks');
         return;
     }
