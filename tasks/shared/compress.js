@@ -54,5 +54,7 @@ module.exports = function (grunt) {
         }
     });
 
+    grunt.registerTask('dist:tgz', 'create a tar.gz file of the dist/ directory', ['compress:dist']);
+
     grunt.loadNpmTasks('grunt-contrib-compress');
 };
