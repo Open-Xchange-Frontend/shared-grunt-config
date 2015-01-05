@@ -54,7 +54,12 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('dist:tgz', 'create a tar.gz file of the dist/ directory', ['compress:dist']);
+    grunt.registerTask('internal:deploy_timestamp', function () {
+        var fs = require('fs');
+        fs.openSync('dist/' + String(new Date().getTime()), 'w');
+    });
+
+    grunt.registerTask('dist:tgz', 'create a tar.gz file of a deployable version', ['internal:deploy_timestamp', 'compress:dist']);
 
     grunt.loadNpmTasks('grunt-contrib-compress');
 };
