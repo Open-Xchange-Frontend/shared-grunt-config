@@ -90,6 +90,9 @@ module.exports = function (grunt) {
             grunt.fail.fatal('Need --prefix option to be set');
         }
         grunt.log.writeln('Installing into:', grunt.option('prefix'));
+        // set destination again, since it might have been set dynamically
+        // seems a hackish, might break once config format changes
+        grunt.config('copy.local_install_dynamic.files.0.dest', grunt.option('prefix'));
         grunt.task.run('copy:local_install_dynamic');
     });
     grunt.registerTask('install:static', 'install files for static usage into a custom location', function () {
@@ -97,6 +100,9 @@ module.exports = function (grunt) {
             grunt.fail.fatal('Need --htdoc option to be set');
         }
         grunt.log.writeln('Installing into:', grunt.option('htdoc'));
+        // set destination again, since it might have been set dynamically
+        // seems a hackish, might break once config format changes
+        grunt.config('copy.local_install_static.files.0.dest', grunt.option('htdoc'));
         grunt.task.run('copy:local_install_static');
     });
 
