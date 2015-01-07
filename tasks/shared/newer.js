@@ -12,6 +12,8 @@ module.exports = function (grunt) {
 
     var fs = require('fs');
     var path = require('path');
+    var async = require('async');
+
     function newestImport(theme) {
         return ['apps/themes/mixins.less', 'apps/themes/definitions.less', path.join('apps/themes/', theme, 'definitions.less')]
             .filter(fs.existsSync)
@@ -21,38 +23,57 @@ module.exports = function (grunt) {
             }, 0);
     }
 
-    function checkForNewerImports(lessFile, mTime, theme, include) {
-        if (newestImport(theme) > mTime) {
-            include(true);
-            return;
-        }
-        var data = grunt.file.read(lessFile),
-            lessDir = path.dirname(lessFile),
-            regex = /@import "(.+?)(\.less)?";/g,
-            shouldInclude = false,
-            match;
-
-        while (!shouldInclude && (match = regex.exec(data)) !== null) {
-            // All of my less files are in the same directory,
-            // other paths may need to be traversed for different setups...
-            var importFile = path.join(lessDir, match[1] + '.less');
-            if (grunt.file.exists(importFile)) {
-                var stat = fs.statSync(importFile);
-                if (stat.mtime > mTime) {
-                    shouldInclude = true;
-                }
-            }
-        }
-        include(shouldInclude);
-    }
-
     grunt.config.merge({
         newer: {
             options: {
-                override: function (detail, include) {
-                    if (detail.task === 'less') {
-                        // call include with `true` if there are newer imports
-                        checkForNewerImports(detail.path, detail.time, detail.target, include);
+                override: function (details, include) {
+                    if (details.task === 'less') {
+                        var theme = /.*\/(.*)\+/.exec(details.target) || details.target;
+                        if (theme !== details.target) theme = theme[1];
+                        if (newestImport(theme) > details.time) {
+                            include(true);
+                            return;
+                        }
+                        var checkFileForModifiedImports = async.memoize(function (filepath, fileCheckCallback) {
+                            fs.readFile(filepath, 'utf8', function (error, data) {
+                                var directoryPath = path.dirname(filepath);
+                                var regex = /@import (?:\([^)]+\) )?"(.+?)(\.less)?"/g;
+                                var match;
+
+                                function checkNextImport() {
+                                    if ((match = regex.exec(data)) === null) {
+                                        return fileCheckCallback(false); // all @import files has been checked.
+                                    }
+
+                                    var importFilePath = path.join(directoryPath, match[1] + '.less');
+                                    fs.exists(importFilePath, function (exists) {
+                                        if (!exists) { // @import file does not exists.
+                                            return checkNextImport(); // skip to next
+                                        }
+
+                                        fs.stat(importFilePath, function (error, stats) {
+                                            if (stats.mtime > details.time) { // @import file has been modified, -> include it.
+                                                fileCheckCallback(true);
+                                            } else {
+                                                // @import file has not been modified but, lets check the @import's of this file.
+                                                checkFileForModifiedImports(importFilePath, function (hasModifiedImport) {
+                                                    if (hasModifiedImport) {
+                                                        fileCheckCallback(true);
+                                                    } else {
+                                                        checkNextImport();
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    });
+                                }
+
+                                checkNextImport();
+                            });
+                        });
+                        checkFileForModifiedImports(details.path, function (found) {
+                            include(found);
+                        });
                     } else {
                         include(false);
                     }
