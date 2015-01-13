@@ -36,6 +36,10 @@ module.exports = function (grunt) {
         return _(languages).contains(languagePart);
     }
 
+    function isMinifiedJSFile(file) {
+        return /\.js$/.test(file) && !/\.min\.js$/.test(file);
+    }
+
     grunt.config.merge({
         copy: {
             dist: {
@@ -46,7 +50,7 @@ module.exports = function (grunt) {
                         cwd: 'build/',
                         dest: 'dist/appsuite/',
                         filter: function (file) {
-                            return !(/.*[^\.min]\.js$/.test(file));
+                            return !isMinifiedJSFile(file);
                         }
 
                     },
@@ -57,7 +61,7 @@ module.exports = function (grunt) {
                         cwd: 'build/',
                         dest: 'dist/appsuite/',
                         filter: function (file) {
-                            return !(/.*[^\.min]\.js$/.test(file));
+                            return !isMinifiedJSFile(file);
                         }
 
                     },
