@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.6.5
+
+* fix issue with minified js files being overwritten during copy_dist
+
 ### v0.6.4
 
 * fix issue with some (json) files not being copied
