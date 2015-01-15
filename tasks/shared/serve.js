@@ -23,7 +23,7 @@ module.exports = function (grunt) {
         connect: {
             server: {
                 options: {
-                    port: 8337,
+                    port: grunt.config('local.appserver.port') || 8337,
                     protocol: grunt.config('local.appserver.protocol') || 'http',
                     base: ['build/'],
                     livereload: grunt.config('local.appserver.livereload') || true,
