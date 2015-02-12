@@ -38,9 +38,28 @@ module.exports = function (grunt) {
                     src: ['<%= pkg.name %>-<%= pkg.version %>/**/*', '<%= pkg.name %>-<%= pkg.version %>/**/.*'],
                     cwd: 'dist/'
                 }]
+            },
+            dist: {
+                options: {
+                    archive: '<%= pkg.name %>-<%= pkg.version %>.tar.gz'
+                },
+                files: [{
+                    expand: true,
+                    src: ['**/*'],
+                    dot: true,
+                    filter: 'isFile',
+                    cwd: 'dist/'
+                }]
             }
         }
     });
+
+    grunt.registerTask('internal:deploy_timestamp', function () {
+        var fs = require('fs');
+        fs.openSync('dist/' + String(new Date().getTime()), 'w');
+    });
+
+    grunt.registerTask('dist:tgz', 'create a tar.gz file of a deployable version', ['internal:deploy_timestamp', 'compress:dist']);
 
     grunt.loadNpmTasks('grunt-contrib-compress');
 };
