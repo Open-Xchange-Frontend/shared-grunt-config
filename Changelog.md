@@ -1,5 +1,13 @@
 # Changelog
 
+### v0.10.1
+
+* fixes some issues:
+    * problem with some JS files being overwritten during dist (dist files not minified)
+    * don't fail on missing appserver dependency (appserver is optional)
+    * fix livereload when used with custom tls options
+    * support for more versions of peer dependencies, in case plugin users want to update
+
 ### v0.10.0
 
 * cleanup [peerD|d]ependencies
