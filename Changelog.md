@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.10.2
+
+* allow underscore 1.8.x as peer dependency
+
 ### v0.10.1
 
 * fixes some issues:
