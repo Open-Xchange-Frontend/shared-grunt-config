@@ -28,8 +28,8 @@ module.exports = function (grunt) {
         grunt.verbose.writeln('No Livereload instance running, will configure watch to start one.');
         if (proto === 'https') {
             lrConf = {
-                key: grunt.file.read('node_modules/grunt-contrib-connect/tasks/certs/server.key'),
-                cert: grunt.file.read('node_modules/grunt-contrib-connect/tasks/certs/server.crt')
+                key: grunt.config('connect.server.options.key') || grunt.file.read('node_modules/grunt-contrib-connect/tasks/certs/server.key'),
+                cert: grunt.config('connect.server.options.cert') || grunt.file.read('node_modules/grunt-contrib-connect/tasks/certs/server.crt')
             };
         }
         grunt.config.set('watch.manifests.options.livereload', lrConf);
