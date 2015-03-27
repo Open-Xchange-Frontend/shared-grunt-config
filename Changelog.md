@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.10.3
+
+* don't restrict upper limits of peer dependency versions
+
 ### v0.10.2
 
 * allow underscore 1.8.x as peer dependency
