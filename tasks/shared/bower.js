@@ -23,5 +23,5 @@ module.exports = function (grunt) {
         }}, grunt.config('checkDependencies'))
     );
 
-    grunt.registerTask('bower', ['checkDependencies:bower'])
+    grunt.registerTask('bower', ['checkDependencies:bower']);
 };
