@@ -10,12 +10,18 @@
 
 module.exports = function (grunt) {
 
-    grunt.config.merge({
-        bower: {
-            options: { copy: false },
-            install: {}
-        }
-    });
+    var _ = require('underscore');
 
-    grunt.loadNpmTasks('grunt-bower-task');
+    grunt.config.merge(_.extend({
+        checkDependencies: {
+            bower: {
+                options: {
+                    packageManager: 'bower',
+                    install: true
+                }
+            }
+        }}, grunt.config('checkDependencies'))
+    );
+
+    grunt.registerTask('bower', ['checkDependencies:bower'])
 };
