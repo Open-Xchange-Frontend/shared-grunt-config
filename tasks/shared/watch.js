@@ -87,17 +87,17 @@ module.exports = function (grunt) {
                 files: [
                     'Gruntfile.js',
                     'grunt/tasks/*.js',
-                    'grunt/local.conf.json'
+                    'grunt/local.conf.json',
+                    'bower.json',
+                    'package.json'
                 ],
-                tasks: ['default']
+                tasks: ['clean', 'repair:bower_install', 'repair:npm_install', 'default', 'force_update', 'send_livereload']
             },
             all: {
                 files: [
                     'apps/**/*.{js,less}',
                     'src/*',
-                    'lib/**/*.js',
-                    'bower.json',
-                    'package.json'
+                    'lib/**/*.js'
                 ],
                 tasks: ['default', 'force_update', 'send_livereload', 'testrun'],
                 options: {}
