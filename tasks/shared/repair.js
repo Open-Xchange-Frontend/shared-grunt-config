@@ -14,7 +14,7 @@ module.exports = function (grunt) {
     }
 
     grunt.registerTask('repair:check', 'Check for several known problems', function () {
-        grunt.task.run(['checkDependencies']);
+        grunt.task.run(['checkDependencies', 'repair:check_local_conf']);
     });
 
     grunt.registerTask('repair:bower', 'Remove bower_components directory and run `bower install`', function () {
@@ -47,6 +47,11 @@ module.exports = function (grunt) {
         } catch (e) {
             handleModuleException(e);
         }
+    });
+
+    grunt.registerTask('repair:check_local_conf', 'Make sure local.conf.json exists', function () {
+        grunt.option('output', 'grunt/local.conf.json');
+        grunt.task.run(['show-config:local']);
     });
 
     grunt.registerTask('repair', 'Try hard to get the setup into a usable state.', function () {
