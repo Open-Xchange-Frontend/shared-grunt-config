@@ -3,6 +3,7 @@
         "protocol": "http",
         "livereload": true,
         "server": "",
+        "rejectUnauthorized": true,
         "verbose": [],
         "prefixes": ["build/"],
         "manifests": ["build/manifests/"]
