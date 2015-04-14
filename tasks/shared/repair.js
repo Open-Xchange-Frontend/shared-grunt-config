@@ -68,7 +68,15 @@ module.exports = function (grunt) {
         grunt.task.run(['show-config:local']);
     });
 
-    grunt.registerTask('repair', 'Try hard to get the setup into a usable state.', function () {
+    grunt.registerTask('repair:all', 'Try hard to get the setup into a usable state.', function () {
         grunt.task.run(['clean', 'repair:bower', 'repair:npm', 'repair:check']);
+    });
+
+    grunt.registerTask('repair', 'Show some information about all repair tasks', function () {
+        if (this.args.length > 0) {
+            grunt.log.warn('Unknown repair task(s)', this.args.join(', '));
+        }
+        grunt.log.writeln('Check `grunt --help | grep repair` to find a list of repair:* tasks');
+        grunt.log.writeln('To run all repair tasks, use `grunt repair:all`');
     });
 };
