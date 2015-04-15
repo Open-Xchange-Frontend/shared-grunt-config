@@ -2,11 +2,6 @@
 
 module.exports = function (grunt) {
 
-    if (!grunt.file.exists('.jscs.json')) {
-        grunt.verbose.warn('No .jscs.json found, skipping jscs tests.');
-        return;
-    }
-
     grunt.config.merge({
         jscs: {
             options: {
@@ -21,5 +16,13 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-jscs');
+    grunt.util.registerDummyTask('jscs', 'grunt-jscs');
+    if (grunt.isPeerDependencyInstalled('grunt-jscs'))
+        grunt.loadNpmTasks('grunt-jscs');
+
+    if (!grunt.file.exists('.jscs.json')) {
+        grunt.registerTask('jscs', 'Dummy task (jscs config file missing)', function () {
+            grunt.log.warn('`.jscs.json` missing in current working directory. Skipping optional jscs task.');
+        });
+    }
 };

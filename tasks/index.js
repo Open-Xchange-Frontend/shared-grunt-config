@@ -65,7 +65,7 @@ module.exports = function (grunt) {
 
     // custom tasks
     grunt.registerTask('manifests', ['newer:jsonlint', 'concat:manifests']);
-    grunt.registerTask('lint', ['newer:jshint:all', 'newer:jsonlint:all']);
+    grunt.registerTask('lint', ['newer:jshint:all', 'newer:jscs:all', 'newer:jsonlint:all']);
 
     // force cache-busting
     grunt.registerTask('force_update', function () {
