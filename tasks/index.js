@@ -54,6 +54,15 @@ module.exports = function (grunt) {
         };
     };
 
+    grunt.util.registerDummyTask = function (name, deps) {
+        deps = [].concat(deps);
+
+        grunt.registerTask(name, 'Dummy task to inform about missing optional dependency' + deps.join(', '), function () {
+            grunt.log.warn('Missing optional dependency', deps.join(', '));
+            grunt.log.warn('Run `npm install --save-dev ' + deps.join(' ') + '` to permanently add this to your projects.');
+        });
+    };
+
     // custom tasks
     grunt.registerTask('manifests', ['newer:jsonlint', 'concat:manifests']);
     grunt.registerTask('lint', ['newer:jshint:all', 'newer:jsonlint:all']);
