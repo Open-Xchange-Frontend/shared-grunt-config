@@ -170,11 +170,11 @@ It will **not** overwrite any custom configuration.
 
 ### repair:check
 
-Run all the repair:check_* tasks mentioned above.
+Run all the `repair:check_*` tasks mentioned above.
 
 ### repair:all
 
-Run all repair:* tasks mentioned above.
+Run all `repair:*` tasks mentioned above.
 
 ## (Unit-)Testing (optional)
 
