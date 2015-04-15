@@ -78,28 +78,25 @@ module.exports = function (grunt) {
         }
     });
 
-    if (grunt.isPeerDependencyInstalled('grunt-exec')) {
-        grunt.config.merge({
-            exec: {
-                dpkg_source: {
-                    cmd: 'dpkg-source -Zgzip -b <%= pkg.name %>-<%= pkg.version %>/',
-                    cwd: 'dist/'
-                }
+    grunt.config.merge({
+        exec: {
+            dpkg_source: {
+                cmd: 'dpkg-source -Zgzip -b <%= pkg.name %>-<%= pkg.version %>/',
+                cwd: 'dist/'
             }
-        });
+        }
+    });
 
-        grunt.loadNpmTasks('grunt-exec');
-
-        grunt.registerTask('dist:dpkg-source', 'run dpkg-source to create debian specific packaging information', function () {
-            if (!grunt.isPeerDependencyInstalled('grunt-exec')) {
-                grunt.log.warn('grunt-exec not installed, cannot run dpkg-source');
-                return;
-            }
-            grunt.task.run(['copy:packaging_deb', 'exec:dpkg_source']);
-        });
-    }
+    grunt.registerTask('dist:dpkg-source', 'run dpkg-source to create debian specific packaging information', function () {
+        grunt.task.run(['copy:packaging_deb', 'exec:dpkg_source']);
+    });
 
     grunt.registerTask('dist:rpm', 'put everything to build an rpm into dist directory', function () {
         grunt.task.run('copy:packaging_rpm');
     });
+
+    grunt.util.registerDummyTask('exec', 'grunt-exec');
+    if (grunt.isPeerDependencyInstalled('grunt-exec')) {
+        grunt.loadNpmTasks('grunt-exec');
+    }
 };

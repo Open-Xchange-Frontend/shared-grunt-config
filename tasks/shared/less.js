@@ -9,6 +9,7 @@
 'use strict';
 
 module.exports = function (grunt) {
+
     var path = require('path');
     var coreDir = grunt.option('coreDir') || grunt.config('local.coreDir') || 'build/';
 
@@ -162,5 +163,9 @@ module.exports = function (grunt) {
         });
     }
 
-    grunt.loadNpmTasks('assemble-less');
+    grunt.util.registerDummyTask('less', 'assemble-less');
+    if (grunt.isPeerDependencyInstalled('assemble-less')) {
+        grunt.loadNpmTasks('assemble-less');
+    }
 };
+

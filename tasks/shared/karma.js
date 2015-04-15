@@ -10,10 +10,7 @@
 
 module.exports = function (grunt) {
 
-    if (!grunt.isPeerDependencyInstalled('grunt-karma')) {
-        grunt.verbose.warn('Skipping karma optional tasks');
-        return;
-    }
+    grunt.registerTask('lint:specs', ['newer:jshint:specs', 'newer:jsonlint:specs']);
 
     var _ = require('underscore');
 
@@ -42,20 +39,6 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.config.merge({
-        copy: {
-            specs: {
-                files: [{
-                    expand: true,
-                    src: ['spec/**/*'],
-                    dest: 'build/'
-                }]
-            }
-        }
-    });
-
-    grunt.registerTask('lint:specs', ['newer:jshint:specs', 'newer:jsonlint:specs']);
-
     // testing stuff
     grunt.registerTask('test', 'Run karma server, if configured', function () {
         if (grunt.option('tests') === false) {
@@ -66,6 +49,18 @@ module.exports = function (grunt) {
             return;
         }
         grunt.task.run(['karma:unit:start']);
+    });
+
+    grunt.config.merge({
+        copy: {
+            specs: {
+                files: [{
+                    expand: true,
+                    src: ['spec/**/*'],
+                    dest: 'build/'
+                }]
+            }
+        }
     });
 
     grunt.registerTask('testrun', 'Run the tests, if test server is running', function () {
@@ -91,5 +86,9 @@ module.exports = function (grunt) {
 
     });
 
-    grunt.loadNpmTasks('grunt-karma');
+    grunt.util.registerDummyTask('karma','grunt-karma');
+    if (grunt.isPeerDependencyInstalled('grunt-karma')) {
+        grunt.loadNpmTasks('grunt-karma');
+    }
 };
+

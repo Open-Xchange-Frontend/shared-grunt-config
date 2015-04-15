@@ -2,11 +2,6 @@
 
 module.exports = function (grunt) {
 
-    if (!grunt.isPeerDependencyInstalled('grunt-contrib-compress')) {
-        grunt.verbose.warn('Skipping optional compress tasks');
-        return;
-    }
-
     grunt.config.merge({
         compress: {
             dependencies_bower: {
@@ -61,5 +56,9 @@ module.exports = function (grunt) {
 
     grunt.registerTask('dist:tgz', 'create a tar.gz file of a deployable version', ['internal:deploy_timestamp', 'compress:dist']);
 
-    grunt.loadNpmTasks('grunt-contrib-compress');
+    grunt.util.registerDummyTask('compress', 'grunt-contrib-compress');
+    if (grunt.isPeerDependencyInstalled('grunt-contrib-compress')) {
+        grunt.loadNpmTasks('grunt-contrib-compress');
+        return;
+    }
 };

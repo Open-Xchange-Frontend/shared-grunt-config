@@ -1,8 +1,5 @@
 'use strict';
 module.exports = function (grunt) {
-    if (!grunt.isPeerDependencyInstalled('grunt-exec')) {
-        return;
-    }
 
     var sign_options = grunt.option('no-sign') === true ? ' -us -uc' : '';
 
@@ -18,8 +15,6 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-exec');
-
     grunt.registerTask('dpkg-buildpackage', 'create installable deb packages based on all packaging information', function () {
         grunt.task.run(['dist:source', 'dist:dpkg-source', 'exec:dpkg_build']);
     });
@@ -27,4 +22,9 @@ module.exports = function (grunt) {
     grunt.registerTask('rpm-build', 'create installable rpm packages based on all packaging information', function () {
         grunt.task.run(['dist:source', 'dist:rpm', 'exec:rpmbuild']);
     });
+
+    grunt.util.registerDummyTask('exec', 'grunt-exec');
+    if (grunt.isPeerDependencyInstalled('grunt-exec')) {
+        grunt.loadNpmTasks('grunt-exec');
+    }
 };

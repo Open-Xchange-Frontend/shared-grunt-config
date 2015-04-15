@@ -2,11 +2,6 @@
 
 module.exports = function (grunt) {
 
-    if (!grunt.isPeerDependencyInstalled('grunt-exec')) {
-        grunt.verbose.warn('Skipping optional msgmerge tasks');
-        return;
-    }
-
     grunt.config.merge({
         exec: {
             msgmerge: {
@@ -23,5 +18,9 @@ module.exports = function (grunt) {
 
     grunt.registerTask('msgmerge', 'Perform msgmerge operation on all po files in i18n/', ['exec:msgmerge']);
 
-    grunt.loadNpmTasks('grunt-exec');
+    grunt.util.registerDummyTask('exec', 'grunt-exec');
+    if (grunt.isPeerDependencyInstalled('grunt-exec')) {
+        grunt.loadNpmTasks('grunt-exec');
+        return;
+    }
 };
