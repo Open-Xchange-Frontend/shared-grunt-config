@@ -1,5 +1,11 @@
 # Changelog
 
+### v0.11.1
+
+* work around problem with bower task
+    * switch to grunt-check-dependencies broke our API
+    * bower task will exit with code 0, even if bower install got invoked
+
 ### v0.11.0
 
 * enable optional `jscs` task as part of the linting process
