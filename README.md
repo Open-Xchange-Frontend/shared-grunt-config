@@ -132,6 +132,50 @@ This helps during development, if `grunt dev` is used (or at least the watch tas
 Run the [connect](#connect) task but wait for ever after the server has been started. Use this to run a MITM proxy
 without the [watch](#watch) task.
 
+## Troubleshooting (repair) tasks (optional)
+
+Those tasks do not have any new direct dependencies, but are targeting the tasks used for development.
+The intention behind those tasks is to support detection of common pitfalls and repair them if possible.
+None of those tasks will do any destructive operation, except when called with the `--force` option.
+
+### repair
+
+This task does nothing but print out some usage information for the repair tasks.
+
+### repair:bower
+
+Wipe the `bower_components/` directory followed by an `bower install`.
+
+### repair:npm
+
+Wipe the `node_modules/` directory followed by an `npm install`.
+
+### repair:check_insecure_tls
+
+Check for potential problems with TLS connections and the appserver proxy component.
+Sometimes, the server to develop against does not provide valid TLS certificates.
+Be it, because it is a development machine, or for any other reason.
+In order to still use the server, there is a new option, allowing to accept untrusted connections
+in the proxy server.
+Run this task with the `--force` command line option, to make sure, this option is set and untrusted
+connections are always accepted.
+
+To reset this to the default, remove `appserver.rejectUnauthorized` option  from `grunt/local.conf.json` or set it to `true`.
+
+### repair:check_local_conf
+
+Make sure the file `grunt/local.conf.json` exists.
+This will create the file with a default configuration, if it did not exist.
+It will **not** overwrite any custom configuration.
+
+### repair:check
+
+Run all the repair:check_* tasks mentioned above.
+
+### repair:all
+
+Run all repair:* tasks mentioned above.
+
 ## (Unit-)Testing (optional)
 
 Those tasks are only available, if the following dependencies are installed:
