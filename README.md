@@ -9,7 +9,7 @@ been extracted to be released on its own.
 
 If you used yo to generate a stub project, you are already setup and ready to use all the goodness.
 
-To manually enable the shared tasks, they need to be loaded in you local `Gruntfile.js`. For this to work, you need to
+To manually enable the shared tasks, they need to be loaded in your local `Gruntfile.js`. For this to work, you need to
 
 ```
 npm install --save-dev open-xchange-shared-grunt-config
