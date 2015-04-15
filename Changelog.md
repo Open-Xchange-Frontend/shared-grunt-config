@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.11.2
+
+* fix data-loss issue with repair:check_local_conf task
+
 ### v0.11.1
 
 * work around problem with bower task
