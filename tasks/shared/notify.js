@@ -3,7 +3,7 @@
 module.exports = function (grunt) {
 
     if (!grunt.isPeerDependencyInstalled('grunt-notify')) {
-        grunt.verbose.warn('Skipping notify optional tasks');
+        grunt.verbose.warn('Skipping optional notify tasks');
         return;
     }
 
