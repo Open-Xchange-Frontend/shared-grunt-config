@@ -27,7 +27,8 @@ module.exports = function (grunt) {
     });
     var localThemes = grunt.file.expand({ cwd: 'apps/themes/' }, '*/definitions.less').filter(function () {
         if (!grunt.file.exists(path.join(coreDir, 'apps/themes/style.less')) &&
-            !grunt.file.exists('apps/themes/style.less') /* actually this is the coreDir, most likely */) {
+            !grunt.file.exists('apps/themes/style.less') &&/* actually this is the coreDir, most likely */
+            grunt.isPeerDependencyInstalled('assemble-less') /* less task will actually do something */) {
             grunt.log.warn('Important file from core directory is missing');
             grunt.log.warn('Building local themes without a (valid) --coreDir option is not supported, at the moment');
             return false;
