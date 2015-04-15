@@ -1,5 +1,32 @@
 # Changelog
 
+### v0.11.0
+
+* enable optional `jscs` task as part of the linting process
+* real optional peer dependencies
+    * print a sane error message if an optional peer dependency is missing
+    * all tasks from public API are now always defined
+* add `repair` task
+    * detect obviously broken setups
+    * fix some issues (semi-)automatically
+* remove grunt-bower dependency
+    * use grunt-check-dependencies instead
+    * one dependency less, since check-dependencies is already installed
+* removed upper limit for peer dependency versions
+    * allow more flexible dependency management for projects
+    * npm@3 will not automatically install peerDependencies any longer
+* newer is now able to detect changes to dependencies of less files
+* new local config options
+    * appserver.port (default: 8337) - configure the appserver port
+    * appserver.rejectUnauthorized (default: true) - optionally switch of some TLS checks
+* add dist:tgz task to support manual deployment
+* better documentation
+* several bugfixes
+    * many of them backported to 0.10 release
+* add optional grunt-notify task
+    * developers can install it to be notified via system notifications
+    * see [grunt-notify](https://github.com/dylang/grunt-notify)
+
 ### v0.10.0
 
 * cleanup [peerD|d]ependencies
