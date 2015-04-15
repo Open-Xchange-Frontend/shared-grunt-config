@@ -23,5 +23,11 @@ module.exports = function (grunt) {
         }}, grunt.config('checkDependencies'))
     );
 
-    grunt.registerTask('bower', ['checkDependencies:bower']);
+    //FIXME: once https://github.com/mzgol/grunt-check-dependencies/pull/8 gets released, switch to this implementation
+    //used, so grunt will exit with an exit code of 0 - this is what our API is supposed to behave like
+    grunt.registerTask('force', 'switch force option :on or :off', function () {
+        grunt.option('force', this.flags.on && !this.flags.off);
+    });
+
+    grunt.registerTask('bower', ['force:on', 'checkDependencies:bower', 'force:off']);
 };
