@@ -1,5 +1,12 @@
 # Changelog
 
+### v0.11.3
+
+* make new repair task more straight forward to use
+    * running `grunt repair` should always put the system into a usable state
+    * other checks and options for repair are intended for advanced users
+* fix broken hotfix introduced in 0.11.2
+
 ### v0.11.2
 
 * fix data-loss issue with repair:check_local_conf task
