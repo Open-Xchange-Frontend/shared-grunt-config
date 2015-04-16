@@ -14,15 +14,13 @@ module.exports = function (grunt) {
     }
 
     grunt.registerTask('repair:check', 'Check for several known problems', function () {
-        grunt.task.run(['checkDependencies', 'repair:check_local_conf']);
+        grunt.task.run(['checkDependencies', 'repair:check_local_conf', 'repair:check_insecure_tls']);
     });
 
     grunt.registerTask('repair:check_insecure_tls', 'Check for the insecure TLS setting', function () {
         if (grunt.config('local.appserver.rejectUnauthorized') === undefined || grunt.config('local.appserver.rejectUnauthorized') === true) {
             grunt.log.oklns('Appserver will reject unauthorized connections to the backend. This is good from a security point of view, but might not work if TLS is not setup properly.');
-            grunt.log.warn('Consider setting `"rejectUnauthorized": false` in your `grunt/local.conf.json` in the `appserver` section, if you are experiencing problems connecting to a backend.');
-        } else {
-            grunt.log.warn('Appserver will not reject unauthorized connections to the backend. Do **not** use this in production.');
+            grunt.log.warn(grunt.log.wraptext(80, 'If you are experiencing problems regarding TLS and certificate verification connecting to your development backend, add `"rejectUnauthorized": false` in your `grunt/local.conf.json` in the `appserver` section.'));
         }
     });
 
