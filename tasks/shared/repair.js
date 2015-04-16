@@ -64,7 +64,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('repair:check_local_conf', 'Make sure local.conf.json exists', function () {
-        if (!grunt.file.exist('grunt/local.conf.json')) {
+        if (!grunt.file.exists('grunt/local.conf.json')) {
             grunt.option('output', 'grunt/local.conf.json');
             grunt.task.run(['show-config:local']);
         }
