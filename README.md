@@ -157,8 +157,6 @@ Sometimes, the server to develop against does not provide valid TLS certificates
 Be it, because it is a development machine, or for any other reason.
 In order to still use the server, there is a new option, allowing to accept untrusted connections
 in the proxy server.
-Run this task with the `--force` command line option, to make sure, this option is set and untrusted
-connections are always accepted.
 
 To reset this to the default, remove `appserver.rejectUnauthorized` option  from `grunt/local.conf.json` or set it to `true`.
 
