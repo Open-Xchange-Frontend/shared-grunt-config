@@ -65,15 +65,23 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('repair:all', 'Try hard to get the setup into a usable state.', function () {
-        grunt.task.run(['clean', 'repair:bower', 'repair:npm', 'repair:check']);
-    });
-
     grunt.registerTask('repair', 'Show some information about all repair tasks', function () {
-        if (this.args.length > 0) {
-            grunt.log.warn('Unknown repair task(s)', this.args.join(', '));
+        if (grunt.cli.tasks.length !== 1 && grunt.cli.tasks[0] === 'repair') {
+            grunt.fail.fatal('Please do only run the repair task all alone.');
         }
-        grunt.log.writeln('Check `grunt --help | grep repair` to find a list of repair:* tasks');
-        grunt.log.writeln('To run all repair tasks, use `grunt repair:all`');
+        if (this.args.length > 0) {
+            grunt.log.writeln('Check `grunt --help | grep repair` to find a list of repair:* tasks');
+            grunt.log.writeln('To run all repair tasks, use `grunt repair` without any arguments.');
+            grunt.fail.warn('Unknown repair task(s):', this.args.join(', '));
+        }
+        var tasks = [];
+        if (!grunt.option('read-only')) {
+            tasks = tasks.concat(['clean', 'repair:bower', 'repair:npm', 'repair:check']);
+        } else {
+            grunt.config('checkDependencies.bower.options.install', false);
+            tasks = tasks.concat(['repair:check']);
+        }
+
+        grunt.task.run(tasks);
     });
 };

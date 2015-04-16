@@ -138,10 +138,6 @@ Those tasks do not have any new direct dependencies, but are targeting the tasks
 The intention behind those tasks is to support detection of common pitfalls and repair them if possible.
 None of those tasks will do any destructive operation, except when called with the `--force` option.
 
-### repair
-
-This task does nothing but print out some usage information for the repair tasks.
-
 ### repair:bower
 
 Wipe the `bower_components/` directory followed by an `bower install`.
@@ -170,9 +166,10 @@ It will **not** overwrite any custom configuration.
 
 Run all the `repair:check_*` tasks mentioned above.
 
-### repair:all
+### repair
 
 Run all `repair:*` tasks mentioned above.
+Use the `--read-only` option for a "read-only" version, which will just print out potential problems.
 
 ## (Unit-)Testing (optional)
 
