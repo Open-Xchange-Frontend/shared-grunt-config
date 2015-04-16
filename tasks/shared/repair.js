@@ -76,7 +76,7 @@ module.exports = function (grunt) {
         }
         var tasks = [];
         if (!grunt.option('read-only')) {
-            tasks = tasks.concat(['clean', 'repair:bower', 'repair:npm', 'repair:check']);
+            tasks = tasks.concat(['clean', 'repair:bower', 'repair:npm', 'repair:check', 'build']);
         } else {
             grunt.config('checkDependencies.bower.options.install', false);
             tasks = tasks.concat(['repair:check']);
