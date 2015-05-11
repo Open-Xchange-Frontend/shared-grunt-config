@@ -1,5 +1,10 @@
 # Changelog
 
+### v0.11.4
+
+* fix issue #2: dist:source task fails
+* little cleanup in dist:source task
+
 ### v0.11.3
 
 * make new repair task more straight forward to use
