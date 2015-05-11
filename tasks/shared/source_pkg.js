@@ -4,6 +4,7 @@ module.exports = function (grunt) {
         copy: {
             source: {
                 files: [{
+                    expand: true,
                     src: [
                         'apps/**/*',
                         'lib/**/*',
@@ -22,6 +23,7 @@ module.exports = function (grunt) {
             },
             dependencies: {
                 files: [{
+                    expand: true,
                     src: [
                         'node_modules/**/*',
                         'bower_components/**/*'
@@ -31,12 +33,14 @@ module.exports = function (grunt) {
             },
             packaging_rpm: {
                 files: [{
+                    expand: true,
                     src: ['<%= pkg.name %>.spec'],
                     dest: 'dist/'
                 }]
             },
             packaging_deb: {
                 files: [{
+                    expand: true,
                     src: ['debian/**/*'],
                     dest: 'dist/<%= pkg.name %>-<%= pkg.version %>/'
                 }]
