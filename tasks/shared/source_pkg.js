@@ -58,7 +58,7 @@ module.exports = function (grunt) {
         grunt.task.run('clean:dist_source');
         grunt.util.runPrefixedSubtasksFor('copy', 'source')();
         if (grunt.option('include-dependencies')) {
-            grunt.task.run(['checkDependencies:build', 'bower:install']);
+            grunt.task.run(['checkDependencies:build', 'checkDependencies:bower']);
             grunt.util.runPrefixedSubtasksFor('copy', 'dependencies')();
         }
         if (grunt.isPeerDependencyInstalled('grunt-contrib-compress') && !grunt.option('no-compress')) {
