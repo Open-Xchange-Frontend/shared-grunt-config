@@ -1,5 +1,10 @@
 # Changelog
 
+### v0.11.5
+
+* handle broken karma setup when using absolute paths for coreDir setting
+    * also expand ~/ like most posix shells do
+
 ### v0.11.4
 
 * fix issue #2: dist:source task fails
