@@ -38,6 +38,8 @@ module.exports = function (grunt) {
     //for less, in detail, this will break @import statements
     //(see http://stackoverflow.com/questions/10715214/lessc-with-an-absolute-path-in-importing)
     var coreDir = grunt.option('coreDir') || grunt.config('local.coreDir') || 'build/';
+    //expand ~/ like many posix shells do (see http://stackoverflow.com/questions/6145492/how-to-resolve-a-relative-path-in-node)
+    coreDir = coreDir.replace(/^~\//, (process.env.HOME || '~') + '/');
     grunt.config('local.coreDir', path.relative(process.cwd(), coreDir));
     grunt.verbose.ok('Using coreDir:', grunt.config('local.coreDir'));
 
