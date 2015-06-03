@@ -40,6 +40,9 @@ module.exports = function (grunt) {
     var coreDir = grunt.option('coreDir') || grunt.config('local.coreDir') || 'build/';
     //expand ~/ like many posix shells do (see http://stackoverflow.com/questions/6145492/how-to-resolve-a-relative-path-in-node)
     coreDir = coreDir.replace(/^~\//, (process.env.HOME || '~') + '/');
+    if (coreDir.indexOf('~/') === 0) {
+        grunt.log.warn('coreDir starts with ~/ and could not be expanded using $HOME environment variable.');
+    }
     grunt.config('local.coreDir', path.relative(process.cwd(), coreDir));
     grunt.verbose.ok('Using coreDir:', grunt.config('local.coreDir'));
 
