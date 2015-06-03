@@ -33,6 +33,13 @@ module.exports = function (grunt) {
         grunt.file.readJSON(path.join(path.dirname(__filename), 'local.conf.default.json')),
         grunt.file.exists('grunt/local.conf.json') ? grunt.file.readJSON('grunt/local.conf.json') : {}
     ));
+    //make coreDir sure coreDir exists and is a relative path,
+    //because absolute paths will break less and karma setups
+    //for less, in detail, this will break @import statements
+    //(see http://stackoverflow.com/questions/10715214/lessc-with-an-absolute-path-in-importing)
+    var coreDir = grunt.option('coreDir') || grunt.config('local.coreDir') || 'build/';
+    grunt.config('local.coreDir', path.relative(process.cwd(), coreDir));
+    grunt.verbose.ok('Using coreDir:', grunt.config('local.coreDir'));
 
     grunt.util.runPrefixedSubtasksFor = function (main_task, prefix) {
         return function () {
