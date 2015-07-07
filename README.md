@@ -110,6 +110,25 @@ it is possible to trigger a reload event to all browsers that are connected to t
 Only useful to run in combination with the watch task, like `grunt connect watch`. See [serve](#serve) for a
 stand-alone version of this task.
 
+#### Using HTTPS
+
+To configure HTTPS protocol for the development server, switch to `"protocol": "https"` in `appserver` section of
+`grunt/local.conf.json`.
+Additionally, values for `key`, `cert` and `ca` can be provided.
+Those will be added to the configuration of the `connect:server` subtask as documented for
+[grunt-connect](https://github.com/gruntjs/grunt-contrib-connect#support-for-https).
+The default settings are:
+
+```
+{
+  "key": "ssl/host.key",
+  "cert": "ssl/host.crt",
+  "ca": "ssl/rootCA.crt"
+}
+```
+
+Those values might point to files that are automatically read or raw PEM data.
+
 ### watch
 
 Watch certain directories for changes and trigger tasks when any change happens. This will trigger a [build](#build),
