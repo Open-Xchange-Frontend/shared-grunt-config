@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.11.6
+
+* more easy HTTPS configuration (see README.md for details)
+
 ### v0.11.5
 
 * handle broken karma setup when using absolute paths for coreDir setting
