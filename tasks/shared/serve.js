@@ -9,6 +9,17 @@
 'use strict';
 
 module.exports = function (grunt) {
+    function tryRead(file) {
+        try {
+            //file found, return it
+            return grunt.file.read(file);
+        } catch (e) {
+            //PEM data injected directly, return it
+            if (/^---/.test(file)) return file;
+        }
+        //no data found
+        return null;
+    }
 
     grunt.registerTask('serve', ['connect:server:keepalive']);
 
@@ -57,6 +68,17 @@ module.exports = function (grunt) {
                 }
             }
         });
+
+        var key = tryRead(grunt.config('local.appserver.key') || 'ssl/host.key');
+        var cert = tryRead(grunt.config('local.appserver.cert') || 'ssl/host.crt');
+        var ca = tryRead(grunt.config('local.appserver.ca') || 'ssl/rootCA.crt');
+
+        if (key && cert && ca) {
+            grunt.config.set('connect.server.options.key', key);
+            grunt.config.set('connect.server.options.cert', cert);
+            grunt.config.set('connect.server.options.ca', ca);
+        }
+
     }
 
     grunt.util.registerDummyTask('connect', ['grunt-contrib-connect', 'appserver']);
