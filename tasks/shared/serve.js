@@ -34,7 +34,7 @@ module.exports = function (grunt) {
                         port: grunt.config('local.appserver.port') || 8337,
                         protocol: grunt.config('local.appserver.protocol') || 'http',
                         base: ['build/'],
-                        livereload: grunt.config('local.appserver.livereload') || true,
+                        livereload: grunt.config('local.appserver.livereload') === undefined || grunt.config('local.appserver.livereload'),//default to true
                         middleware: function (connect, options, middlewares) {
                             var config = grunt.config().local.appserver;
                             if (config.server === '') {
