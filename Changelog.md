@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.11.7
+
+* Remove deprecation warning for grunt.config.extend. It has its use-cases.
+
 ### v0.11.6
 
 * more easy HTTPS configuration (see README.md for details)
