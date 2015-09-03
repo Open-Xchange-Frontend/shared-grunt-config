@@ -110,6 +110,21 @@ it is possible to trigger a reload event to all browsers that are connected to t
 Only useful to run in combination with the watch task, like `grunt connect watch`. See [serve](#serve) for a
 stand-alone version of this task.
 
+#### Activating a proxy server
+
+Sometimes, a production setup requires to have correct host names setup and be used to develop or debug against a system.
+In such cases, it is possible to activate a proxy server that will send certain requests through the MITM (appserver) proxy
+and proxy all other requests directly like *real* proxy servers (like squid) do.
+
+In `grunt/local.conf.json` just add an entry `"proxy": true` to start a proxy server at the default port (8080). Instead of
+`true`, a custom port number might be specified.
+
+Once the `connect:proxy` task is running, a browsers proxy settings might be configured to use `localhost:8080` as a proxy
+server for HTTP(S) traffic.
+
+Drawback: when using the proxy server, _livereload_ middleware can not be used, yet. A browser plugin for livereload would
+be needed in such cases, or reloads must be triggered manually.
+
 #### Using HTTPS
 
 To configure HTTPS protocol for the development server, switch to `"protocol": "https"` in `appserver` section of
