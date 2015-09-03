@@ -1,5 +1,12 @@
 # Changelog
 
+### v0.12.0
+
+* add new proxy feature
+    * develop against external systems using browser proxy settings to unify URLs
+    * use HTTP CONNECT to proxy HTTPS traffic
+    * integrate appserver middleware to route special traffic through appserver
+
 ### v0.11.8
 
 * fix problem of local.appserver.livereload not evaluated correctly
