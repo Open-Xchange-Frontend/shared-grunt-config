@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.11.8
+
+* fix problem of local.appserver.livereload not evaluated correctly
+
 ### v0.11.7
 
 * Remove deprecation warning for grunt.config.extend. It has its use-cases.
