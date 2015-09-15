@@ -28,10 +28,23 @@ module.exports = function (grunt) {
                     server.on('connect', function (req, cltSocket, head) {
                         // connect to an origin server
                         var srvUrl;
+                        var host = req.headers.host.split(':')[0];
+                        var reqPort = req.headers.host.split(':')[1] || '443';
                         var conf = grunt.config('local.appserver');
-                        if (appserverUrl && conf && (conf.server || '').indexOf(req.headers.host) >= 0) {
+                        var server = conf.server || '';
+                        //default to 443, that's what browsers do
+                        var serverPort = (server.match(/:([0-9]+)\//) || [])[1] || '443';
+                        if (appserverUrl && conf && server.indexOf(host) >= 0) {
                             //intended appserver connection
-                            srvUrl = appserverUrl;
+                            srvUrl = {};
+                            srvUrl.hostname = appserverUrl.hostname;
+                            if (reqPort !== serverPort) {
+                                //do not change the port if not meant for appserver
+                                //this should allow livereload
+                                srvUrl.port = reqPort;
+                            } else {
+                                srvUrl.port = appserverUrl.port;
+                            }
                         } else {
                             srvUrl = url.parse('https://' + req.url);
                         }
