@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.12.1
+
+* [proxy] fix issue with PROXY requests containing port numbers sometimes
+
 ### v0.12.0
 
 * add new proxy feature
