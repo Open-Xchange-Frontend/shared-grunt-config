@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.12.2
+
+* i18n module template: handle plural forms in all languages corectly
+
 ### v0.12.1
 
 * [proxy] fix issue with PROXY requests containing port numbers sometimes
