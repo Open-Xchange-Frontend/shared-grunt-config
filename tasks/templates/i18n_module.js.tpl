@@ -7,8 +7,8 @@
  * integrated into the templates to be of use for everybody.
  */
 <%
-function extractSingularOnly(arr) {
-    if (arr.length < 2) {
+function extractSingularOnly(msgid, arr) {
+    if (msgid.indexOf('\x01') < 0) {
         return arr[0];
     }
     return arr;
@@ -20,7 +20,7 @@ define("<%= module %>.<%= language %>", ["io.ox/core/gettext"], function (g) {
         "plural": "<%= plural %>",
         "dictionary": {
             <% for (var msgid in dictionary) { %>
-                <%= JSON.stringify(msgid) %>: <%= JSON.stringify(extractSingularOnly(dictionary[msgid])) %>,
+                <%= JSON.stringify(msgid) %>: <%= JSON.stringify(extractSingularOnly(msgid, dictionary[msgid])) %>,
             <% } %>
         }
     });
