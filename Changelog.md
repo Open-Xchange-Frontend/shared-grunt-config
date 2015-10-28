@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.11.9
+
+* i18n module template: handle plural forms in all languages corectly
+
 ### v0.11.8
 
 * fix problem of local.appserver.livereload not evaluated correctly
