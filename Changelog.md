@@ -1,5 +1,15 @@
 # Changelog
 
+### v0.6.7
+
+* i18n module template: handle plural forms in all languages corectly
+
+### v0.6.6
+
+* update appserver to v0.5.0
+    * breaks compatibility with node 0.6
+    * fixes issues with node 0.12
+
 ### v0.6.5
 
 * fix issue with minified js files being overwritten during copy_dist
