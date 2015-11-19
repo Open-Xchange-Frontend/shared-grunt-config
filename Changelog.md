@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.12.3
+
+* add new default option for newer grunt-require-gettext versions (>=0.7.0)
+
 ### v0.12.2
 
 * i18n module template: handle plural forms in all languages corectly
