@@ -9,9 +9,9 @@
     "test": "node -e 'require(\"grunt\").cli()'"
   },
   "devDependencies": {
-    "grunt-bump": "0.3.0",
-    "grunt-contrib-jshint": "^0.11.0",
-    "grunt-jscs": "^1.6.0"
+    "grunt-bump": "^0.7.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-jscs": "^2.8.0"
   },
   "peerDependencies": {
     "grunt": ">=0.4.5",
