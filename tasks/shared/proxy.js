@@ -53,11 +53,12 @@ module.exports = function (grunt) {
                             'Proxy-agent: Node-Proxy\r\n' +
                             '\r\n');
                             srvSocket.write(head);
+                            //reset timeout to default, because we the connection now most likely works
+                            srvSocket.setTimeout(120000);
                             srvSocket.pipe(cltSocket);
                             cltSocket.pipe(srvSocket);
                         });
-                        //add timeout, because we do not want to wait very long
-                        //timeout will trigger when no traffic is done at all for 5s
+                        //add a quite low timeout value, because the proxy will always be reachable, but the remote might not
                         srvSocket.setTimeout(10000);
                         srvSocket.on('timeout', function () {
                             srvSocket.end();
@@ -85,6 +86,8 @@ module.exports = function (grunt) {
                                 response.end(chunk, 'binary');
                             });
                         });
+                        //TODO: 10s might be a little low, there might be requests that take longer
+                        //find a similar solution to the one above (only set low timeout until remote has answered once)
                         proxyRequest.setTimeout(10000, function () {
                             proxyRequest.end();
                             next();
