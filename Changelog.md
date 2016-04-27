@@ -1,5 +1,10 @@
 # Changelog
 
+### v0.12.4
+
+* improve timeout handling of internal CONNECT proxy
+* be more robust when trying to read key file
+
 ### v0.12.3
 
 * add new default option for newer grunt-require-gettext versions (>=0.7.0)
