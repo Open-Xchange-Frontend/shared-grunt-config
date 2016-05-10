@@ -96,4 +96,13 @@ module.exports = function (grunt) {
 
     // load pre-configured grunt tasks
     grunt.loadTasks(path.join(path.dirname(__filename), 'shared'));
+
+    try {
+        require(path.relative(__dirname, 'grunt/local.conf.js'))(grunt);
+    } catch (e) {
+        if (e.code !== 'MODULE_NOT_FOUND') {
+            // module not found is okay, but everything else is worth a warning
+            grunt.fail.warn('Error processing grunt/local.conf.js: "' + e + '"');
+        }
+    }
 };
