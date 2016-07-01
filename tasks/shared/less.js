@@ -12,16 +12,21 @@ module.exports = function (grunt) {
 
     var path = require('path');
     var coreDir = grunt.config('local.coreDir');
+    var prefixDirs = grunt.config('local.appserver.prefixes') || [];
 
     //TODO: get rid of coreDir dependency for less files
     //if no coreDir is specified, compile everything for 'default' theme, this can be used
     //with local versions of core definitions.less, mixins.less and style.less.
     //Just place those files in lib/appsuite/apps/themes/
-    var coreThemes = (/^\.\.[/\\].+/.test(coreDir) ?
-        grunt.file.expand({ cwd: path.join(coreDir, 'apps/themes/') }, '*/definitions.less') : []
-    ).map(function (file) {
-        return file.replace(/\/definitions.less$/, '');
-    });
+    var coreThemes = [].concat(prefixDirs, coreDir).filter(function (dir) {
+        return /^\.\.[/\\].+/.test(dir);
+    }).map(function (dir) {
+        return grunt.file.expand({ cwd: path.join(dir, 'apps/themes/') }, '*/definitions.less').map(function (file) {
+            return file.replace(/\/definitions.less$/, '');
+        });
+    }).reduce(function flatten(acc, dirs) {
+        return [].concat(acc, dirs);
+    }, []);
     var localThemes = grunt.file.expand({ cwd: 'apps/themes/' }, '*/definitions.less').filter(function () {
         if (!grunt.file.exists(path.join(coreDir, 'apps/themes/style.less')) &&
             !grunt.file.exists('apps/themes/style.less') &&/* actually this is the coreDir, most likely */

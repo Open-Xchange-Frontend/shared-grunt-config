@@ -120,6 +120,11 @@ command line or via a file in `grunt/local.conf.json`. This `coreDir`
 variable needs to point to a directory containing core less files, like
 a distributed version of the core UI or the core UI repository itself.
 
+In order to build local less files against more themes, those will also be looked up from directories specified in
+the `appserver.prefixes` array (local.conf).
+
+Because of some limitations in grunt, those only relative paths can be considered for this lookup.
+
 ## Development tasks (optional)
 
 Those tasks are only available, if the following dependencies are installed:
