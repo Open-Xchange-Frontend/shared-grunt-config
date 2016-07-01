@@ -122,8 +122,7 @@ a distributed version of the core UI or the core UI repository itself.
 
 In order to build local less files against more themes, those will also be looked up from directories specified in
 the `appserver.prefixes` array (local.conf).
-
-Because of some limitations in grunt, those only relative paths can be considered for this lookup.
+Because of some limitations in grunt, only relative paths can be considered for this lookup.
 
 ## Development tasks (optional)
 
