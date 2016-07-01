@@ -1,5 +1,12 @@
 # Changelog
 
+### v0.13.0
+
+* add possibility for local grunt extensions written in JavaScript
+    * make sure, `grunt/local.conf*` is in your .gitignore
+    * put your code into `grunt/local.conf.js`
+* also search `appserver.prefixes` paths for themes to build against
+
 ### v0.12.4
 
 * improve timeout handling of internal CONNECT proxy
