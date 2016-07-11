@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.13.1
+
+* new coreThemes feature (search in `appserver.prefixes`) now works with absolute paths
+
 ### v0.13.0
 
 * add possibility for local grunt extensions written in JavaScript
