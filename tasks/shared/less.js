@@ -18,9 +18,10 @@ module.exports = function (grunt) {
     //if no coreDir is specified, compile everything for 'default' theme, this can be used
     //with local versions of core definitions.less, mixins.less and style.less.
     //Just place those files in lib/appsuite/apps/themes/
-    var coreThemes = [].concat(prefixDirs, coreDir).filter(function (dir) {
-        return /^\.\.[/\\].+/.test(dir);
-    }).map(function (dir) {
+    var coreThemes = [].concat(prefixDirs, coreDir).map(function (dir) {
+        //always use relativ paths for less, or this will break @import statements
+        //(see http://stackoverflow.com/questions/10715214/lessc-with-an-absolute-path-in-importing)
+        dir = path.relative(process.cwd(), dir);
         return grunt.file.expand({ cwd: path.join(dir, 'apps/themes/') }, '*/definitions.less').map(function (file) {
             return file.replace(/\/definitions.less$/, '');
         });
