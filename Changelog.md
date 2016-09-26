@@ -1,5 +1,11 @@
 # Changelog
 
+### v0.14.0
+
+* remove jshint + jscs code style checking
+* add eslint statical code analysis
+    * we suggest to extend [eslint-config-open-xchange-appsuite](https://gitlab.open-xchange.com/frontend/eslint-ruleset) configuration
+
 ### v0.13.1
 
 * new coreThemes feature (search in `appserver.prefixes`) now works with absolute paths
