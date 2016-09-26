@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.14.1
+
+* fix minor versioning issue, which might hit when grunt-eslint gets an upgrade
+
 ### v0.14.0
 
 * remove jshint + jscs code style checking
