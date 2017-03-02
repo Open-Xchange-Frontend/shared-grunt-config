@@ -80,8 +80,9 @@ module.exports = function (grunt) {
 
     // force cache-busting
     grunt.registerTask('force_update', function () {
-        var fs = require('fs');
-        fs.utimesSync('build/', new Date(), new Date());
+        var fs = require('fs'),
+            dir = grunt.config('local.appserver.prefixes.0') || 'build/';
+        fs.utimesSync(dir, new Date(), new Date());
     });
     // steps to build the ui (ready for development)
     grunt.registerTask('build', ['lint', 'copy_build', 'newer:concat', 'newer:less', 'compile_po']);
