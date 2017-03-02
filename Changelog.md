@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.14.2
+
+* fix force_update task if `build/` in the current working directory is not part of appserver prefixes array
+
 ### v0.14.1
 
 * fix minor versioning issue, which might hit when grunt-eslint gets an upgrade
