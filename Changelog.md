@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.14.3
+
+* improve automatic detection of running karma server
+
 ### v0.14.2
 
 * fix force_update task if `build/` in the current working directory is not part of appserver prefixes array
