@@ -69,6 +69,8 @@ module.exports = function (grunt) {
             return;
         }
         var done = this.async();
+        // karma config uses these defaults
+        var listenAddr = process.env.LISTEN_ADDR || grunt.config('karma.options.listenAddress') || '0.0.0.0';
 
         var net = require('net');
         var server = net.createServer();
@@ -77,7 +79,7 @@ module.exports = function (grunt) {
             grunt.task.run(['newer:copy:specs', 'karma:unit:run']);
             done();
         });
-        server.listen(9876, function () {
+        server.listen(9876, listenAddr, function () {
             grunt.verbose.warn('No karma server running, skipping specs ');
             server.close();
             grunt.task.run(['newer:copy:specs']);
