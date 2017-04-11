@@ -33,11 +33,13 @@ module.exports = function (grunt) {
             //continuous integration mode: run tests once in PhantomJS browser.
             continuous: {
                 singleRun: true,
-                browsers: ['PhantomJS'],
-                reporters: ['junit']
+                browsers: ['PhantomJS']
             }
         }
     });
+    if (grunt.isPeerDependencyInstalled('karma-junit-reporter')) {
+        grunt.config.set('karma.continuous.reporters', ['junit']);
+    }
 
     // testing stuff
     grunt.registerTask('test', 'Run karma server, if configured', function () {
