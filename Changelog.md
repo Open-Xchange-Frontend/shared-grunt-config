@@ -1,5 +1,11 @@
 # Changelog
 
+### v0.14.4
+
+* improve testing behaviour
+    * remove jshint task
+    * make junit reporter optional for continuous testing
+
 ### v0.14.3
 
 * improve automatic detection of running karma server
