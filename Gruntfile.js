@@ -3,17 +3,9 @@
 module.exports = function (grunt) {
 
     grunt.config.init({
-        jshint: {
+        eslint: {
             options: {
                 jshintrc: true
-            },
-            all: {
-                src: ['Gruntfile.js', 'tasks/**/*.js']
-            }
-        },
-        jscs: {
-            options: {
-                config: '.jscs.json'
             },
             all: {
                 src: ['Gruntfile.js', 'tasks/**/*.js']
@@ -28,10 +20,9 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-jscs');
+    grunt.loadNpmTasks('grunt-eslint');
     grunt.loadNpmTasks('grunt-bump');
 
     // default task
-    grunt.registerTask('default', ['jshint:all', 'jscs:all']);
+    grunt.registerTask('default', ['eslint:all']);
 };
