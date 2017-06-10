@@ -4,16 +4,6 @@ module.exports = function (grunt) {
 
     grunt.config.merge({
         compress: {
-            dependencies_bower: {
-                options: {
-                    archive: 'dist/<%= pkg.name %>_<%= pkg.version %>.orig-bower_components.tar.gz'
-                },
-                files: [{
-                    expand: true,
-                    cwd: 'dist/<%= pkg.name %>-<%= pkg.version %>/',
-                    src: ['bower_components/**/*']
-                }]
-            },
             dependencies_node: {
                 options: {
                     archive: 'dist/<%= pkg.name %>_<%= pkg.version %>.orig-node_modules.tar.gz'

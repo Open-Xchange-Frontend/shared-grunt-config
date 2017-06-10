@@ -45,7 +45,6 @@ this shared configuration.
 ### default
 
 This task will check for all development dependencies to be installed. If not, `npm install` will be run.
-After that, all bower components are checked, `bower install` will be run, if needed.
 Then the [build](#build) task will be run, to provide a runnable version of the software in the `build/` directory.
 
 ### build
@@ -67,7 +66,7 @@ the final directory structure that just needs to be copied over to the destinati
 
 ### clean
 
-Remove all files created temporarily during development. Installed dependencies (`bower_components/` or `node_modules/`) are
+Remove all files created temporarily during development. Installed dependencies (`node_modules/`) are
 not counted as such temporary files. Those have to be removed manually, if needed.
 
 ### install:dist
@@ -218,10 +217,6 @@ grunt default install --dest=~/public_html/appsuite/
 Those tasks do not have any new direct dependencies, but are targeting the tasks used for development.
 The intention behind those tasks is to support detection of common pitfalls and repair them if possible.
 None of those tasks will do any destructive operation, except when called with the `--force` option.
-
-### repair:bower
-
-Wipe the `bower_components/` directory followed by an `bower install`.
 
 ### repair:npm
 

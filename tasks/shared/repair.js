@@ -24,26 +24,11 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('repair:bower', 'Remove bower_components directory and run `bower install`', function () {
-        grunt.config('clean.bower_components', ['bower_components']);
-        grunt.task.run(['clean:bower_components', 'repair:bower_install']);
-    });
-    grunt.registerTask('repair:bower_install', 'Run bower install', function () {
-        var done = this.async();
-        try {
-            var bower = require('bower');
-            bower.commands
-                .install([], { silent: true })
-                .on('end', done);
-        } catch (e) {
-            handleModuleException(e);
-        }
-    });
-
     grunt.registerTask('repair:npm', 'Remove node_modules directory and run `npm install`', function () {
         grunt.config('clean.node_modules', ['node_modules']);
         grunt.task.run(['clean:node_modules', 'repair:npm_install']);
     });
+
     grunt.registerTask('repair:npm_install', 'Run npm install', function () {
         var done = this.async();
         try {
@@ -74,9 +59,8 @@ module.exports = function (grunt) {
         }
         var tasks = [];
         if (!grunt.option('read-only')) {
-            tasks = tasks.concat(['clean', 'repair:bower', 'repair:npm', 'repair:check', 'build']);
+            tasks = tasks.concat(['clean', 'repair:npm', 'repair:check', 'build']);
         } else {
-            grunt.config('checkDependencies.bower.options.install', false);
             tasks = tasks.concat(['repair:check']);
         }
 

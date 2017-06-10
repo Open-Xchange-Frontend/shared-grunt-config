@@ -14,7 +14,6 @@ module.exports = function (grunt) {
                         'lib/**/*',
                         'Gruntfile.js',
                         '.jshintrc',
-                        'bower.json',
                         'package.json'
                     ],
                     dot: true,
@@ -25,8 +24,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     src: [
-                        'node_modules/**/*',
-                        'bower_components/**/*'
+                        'node_modules/**/*'
                     ],
                     dest: 'dist/<%= pkg.name %>-<%= pkg.version %>/'
                 }]
@@ -58,7 +56,7 @@ module.exports = function (grunt) {
         grunt.task.run('clean:dist_source');
         grunt.util.runPrefixedSubtasksFor('copy', 'source')();
         if (grunt.option('include-dependencies')) {
-            grunt.task.run(['checkDependencies:build', 'checkDependencies:bower']);
+            grunt.task.run(['checkDependencies:build']);
             grunt.util.runPrefixedSubtasksFor('copy', 'dependencies')();
         }
         if (grunt.isPeerDependencyInstalled('grunt-contrib-compress') && !grunt.option('no-compress')) {
@@ -71,7 +69,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('dist:dependencies', 'create a source tarball of the dependencies of the module', function () {
-        grunt.task.run(['clean:dist_source', 'checkDependencies:build', 'bower:install']);
+        grunt.task.run(['clean:dist_source', 'checkDependencies:build']);
         grunt.util.runPrefixedSubtasksFor('copy', 'dependencies')();
         if (grunt.isPeerDependencyInstalled('grunt-contrib-compress') && !grunt.option('no-compress')) {
             grunt.util.runPrefixedSubtasksFor('compress', 'dependencies')();

@@ -91,7 +91,7 @@ module.exports = function (grunt) {
     // run a clean development setup
     grunt.registerTask('cleanDev', ['clean', 'default', 'connect', 'test', 'watch']);
     // default task
-    grunt.registerTask('default', ['checkDependencies:dev', 'checkDependencies:bower', 'build']);
+    grunt.registerTask('default', ['checkDependencies:dev', 'build']);
     // refresh the browser if watch task (with livereload) is running
     grunt.registerTask('refresh', 'force an update and reload the broweser', ['force_update', 'send_livereload']);
 
