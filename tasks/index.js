@@ -98,6 +98,11 @@ module.exports = function (grunt) {
     // load pre-configured grunt tasks
     grunt.loadTasks(path.join(path.dirname(__filename), 'shared'));
 
+    // deprecated bower task
+    grunt.registerTask('bower:install', function () {
+        grunt.log.error('The use of bower is deprecated in 7.10, please use npm.');
+    });
+
     try {
         require(path.relative(__dirname, 'grunt/local.conf.js'))(grunt);
     } catch (e) {
