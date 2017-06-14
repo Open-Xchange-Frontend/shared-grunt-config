@@ -107,7 +107,7 @@ module.exports = function (grunt) {
 
     // build a distribution ready version of the ui
     grunt.registerTask('dist:build', 'build a distribution ready version into dist/',
-        ['clean', 'checkDependencies:build', 'build', 'copy_dist', 'uglify']
+        ['clean', 'copy_build', 'newer:concat', 'newer:less', 'compile_po', 'copy_dist', 'uglify']
     );
 
     //for backwards compatibility:
