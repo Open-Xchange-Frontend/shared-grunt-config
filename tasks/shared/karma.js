@@ -10,8 +10,6 @@
 
 module.exports = function (grunt) {
 
-    grunt.registerTask('lint:specs', ['newer:jsonlint:specs']);
-
     var _ = require('underscore');
 
     grunt.config.merge({

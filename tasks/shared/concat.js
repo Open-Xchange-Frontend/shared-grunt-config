@@ -20,7 +20,7 @@ module.exports = function (grunt) {
                     process: function (rawData, filepath) {
                         var manifest = [],
                             data = JSON.parse(rawData),
-                            prefix = /^apps[\\\/](.*)[\\\/]manifest\.json$/.exec(filepath)[1].replace(/\\/g, '/') + '/';
+                            prefix = /^apps[\\/](.*)[\\/]manifest\.json$/.exec(filepath)[1].replace(/\\/g, '/') + '/';
                         if (data && (data.constructor !== Array)) data = [data];
                         for (var i = 0; i < data.length; i++) {
                             if (!data[i].path) {

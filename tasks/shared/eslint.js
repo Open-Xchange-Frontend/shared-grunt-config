@@ -20,7 +20,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     src: [
-                        'Gruntfile.js', 'grunt/tasks/*.js', 'apps/**/*.js', 'src/*.js', 'spec/**/*.js'
+                        '*.js', '{grunt,apps,src,spec}/**/*.{js,json}', '!apps/io.ox/core/date/*.json'
                     ],
                     filter: 'isFile'
                 }]
