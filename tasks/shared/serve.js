@@ -62,10 +62,12 @@ module.exports = function (grunt) {
                             // Todo: Take care of middlewares by connect
                             middlewares = [];
 
-                            middlewares.push(appserver.middleware.appsload(config));
-                            middlewares.push(appserver.middleware.manifests(config));
+                            if (this.flags.mock === true) {
+                                middlewares.push(appserver.middleware.mockData(config));
+                            }
+                            middlewares.push(appserver.middleware.preFetch(config));
+                            middlewares.push(appserver.middleware.ui(config));
                             middlewares.push(appserver.middleware.login(config));
-                            middlewares.push(appserver.middleware.localfiles(config));
                             middlewares.push(appserver.middleware.proxy(config));
                             return middlewares;
                         }
