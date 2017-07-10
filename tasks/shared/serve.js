@@ -35,6 +35,11 @@ module.exports = function (grunt) {
                         protocol: grunt.config('local.appserver.protocol') || 'http',
                         base: ['build/'],
                         livereload: grunt.config('local.appserver.livereload') === undefined || grunt.config('local.appserver.livereload'),//default to true
+                        onCreateServer: function (server) {
+                            var config = appserver.tools.unifyOptions(grunt.config('local.appserver'));
+
+                            server.on('upgrade', appserver.middleware.wsProxy(config));
+                        },
                         middleware: function (connect, options, middlewares) {
                             var config = grunt.config().local.appserver;
                             if (config.server === '') {
