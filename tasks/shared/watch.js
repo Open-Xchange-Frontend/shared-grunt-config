@@ -26,6 +26,9 @@ module.exports = function (grunt) {
             port: 35729,
             path: '/changed',
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
             rejectUnauthorized: false
         }, function () {
             grunt.verbose.writeln('Livereload request sent');
