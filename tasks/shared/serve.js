@@ -33,6 +33,7 @@ module.exports = function (grunt) {
                     options: {
                         port: grunt.config('local.appserver.port') || 8337,
                         protocol: grunt.config('local.appserver.protocol') || 'http',
+                        hostname: '*',
                         base: ['build/'],
                         livereload: grunt.config('local.appserver.livereload') === undefined || grunt.config('local.appserver.livereload'),//default to true
                         onCreateServer: function (server) {
