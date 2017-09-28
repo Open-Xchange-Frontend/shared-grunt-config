@@ -13,6 +13,15 @@ module.exports = function (grunt) {
         return;
     }
 
+    var agent, protocol, protocolImpl;
+    var proxyURL = grunt.config('local.appserver.upstream_proxy') || process.env.http_proxy;
+    if (proxyURL) {
+        agent = new (require('proxy-agent'))(proxyURL);
+        protocol = url.parse(proxyURL).protocol === 'https:' ? 'https' : 'http';
+        protocolImpl = require(protocol);
+        protocol += ':';
+    }
+
     var appserverUrl;
     grunt.event.once('connect.server.listening', function (host, port) {
         appserverUrl = {};
@@ -47,11 +56,41 @@ module.exports = function (grunt) {
                             }
                         } else {
                             srvUrl = url.parse('https://' + req.url);
+                            if (agent) {
+                                var opt = url.parse(proxyURL);
+                                opt.method = req.method;
+                                opt.headers = req.headers;
+                                opt.headers.host = opt.host;
+                                opt.path = req.url;
+                                opt.protocol = protocol;
+                                opt.rejectUnauthorized = conf.rejectUnauthorized;
+                                //opt.agent = agent;
+                                var proxyRequest = protocolImpl.request(opt);
+                                proxyRequest.end();
+                                proxyRequest.on('connect', function (res, srvSocket) {
+                                    cltSocket.write('HTTP/1.1 200 Connection Established\r\n' +
+                                        'Proxy-agent: Node-Proxy\r\n' +
+                                        '\r\n');
+                                    srvSocket.write(head);
+                                    srvSocket.setTimeout(120000);
+                                    srvSocket.pipe(cltSocket);
+                                    cltSocket.pipe(srvSocket);
+                                });
+                                proxyRequest.on('socket', function(srvSocket) {
+                                    //add a quite low timeout value, because the proxy will always be reachable, but the remote might not
+                                    srvSocket.setTimeout(10000);
+                                    srvSocket.on('timeout', function () {
+                                        srvSocket.end();
+                                        cltSocket.end();
+                                    });
+                                });
+                                return;
+                            }
                         }
                         var srvSocket = net.connect(srvUrl.port, srvUrl.hostname, function () {
                             cltSocket.write('HTTP/1.1 200 Connection Established\r\n' +
-                            'Proxy-agent: Node-Proxy\r\n' +
-                            '\r\n');
+                                'Proxy-agent: Node-Proxy\r\n' +
+                                '\r\n');
                             srvSocket.write(head);
                             //reset timeout to default, because we the connection now most likely works
                             srvSocket.setTimeout(120000);
@@ -76,8 +115,9 @@ module.exports = function (grunt) {
                         var opt = require('url').parse(request.url);
                         opt.headers = request.headers;
                         opt.method = request.method;
+                        if (agent) opt.agent = agent;
 
-                        var proxyRequest = require('http').request(opt, function (res) {
+                        var proxyRequest = protocolImpl.request(opt, function (res) {
                             response.writeHead(res.statusCode, res.headers);
                             res.on('data', function (chunk) {
                                 response.write(chunk, 'binary');
