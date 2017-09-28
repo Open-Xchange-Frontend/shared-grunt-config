@@ -76,7 +76,7 @@ module.exports = function (grunt) {
                                     srvSocket.pipe(cltSocket);
                                     cltSocket.pipe(srvSocket);
                                 });
-                                proxyRequest.on('socket', function(srvSocket) {
+                                proxyRequest.on('socket', function (srvSocket) {
                                     //add a quite low timeout value, because the proxy will always be reachable, but the remote might not
                                     srvSocket.setTimeout(10000);
                                     srvSocket.on('timeout', function () {
