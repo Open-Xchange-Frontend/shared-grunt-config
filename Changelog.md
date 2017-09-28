@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.14.5
+
+* add support for upstream_proxy
+
 ### v0.14.4
 
 * improve testing behaviour
