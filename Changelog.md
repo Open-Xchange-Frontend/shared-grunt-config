@@ -1,5 +1,9 @@
 # Changelog
 
+### v0.14.6
+
+* Fix [Open-Xchange-Frontend/generator-ox-ui-module#4](https://github.com/Open-Xchange-Frontend/generator-ox-ui-module/issues/4) - linter config fails in source packages
+
 ### v0.14.5
 
 * add support for upstream_proxy
