@@ -15,6 +15,7 @@ module.exports = function (grunt) {
                         'Gruntfile.js',
                         '.jshintrc',
                         'bower.json',
+                        '.eslintrc',
                         'package.json'
                     ],
                     dot: true,
