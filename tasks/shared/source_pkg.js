@@ -14,6 +14,7 @@ module.exports = function (grunt) {
                         'lib/**/*',
                         'Gruntfile.js',
                         '.jshintrc',
+                        '.eslintrc',
                         'package.json'
                     ],
                     dot: true,
