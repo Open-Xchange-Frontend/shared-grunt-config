@@ -69,6 +69,7 @@ module.exports = function (grunt) {
                             middlewares.push(appserver.middleware.preFetch(config));
                             middlewares.push(appserver.middleware.ui(config));
                             middlewares.push(appserver.middleware.login(config));
+                            middlewares.push(appserver.middleware.manifests(config));
                             middlewares.push(appserver.middleware.proxy(config));
                             return middlewares;
                         }
