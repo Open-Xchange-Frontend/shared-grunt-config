@@ -63,6 +63,15 @@ module.exports = function (grunt) {
                             // Todo: Take care of middlewares by connect
                             middlewares = [];
 
+                            middlewares.push(function (req, res, next) {
+                                if (req.url === '/' && config.urlPath !== '/') {
+                                    res.writeHead(302, {
+                                        'Location': config.urlPath
+                                    });
+                                    return res.end();
+                                }
+                                return next();
+                            });
                             if (this.flags.mock === true) {
                                 middlewares.push(appserver.middleware.mockData(config));
                             }
