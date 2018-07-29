@@ -131,5 +131,7 @@ module.exports = function (grunt) {
         });
     });
 
+    grunt.registerTask('install:languages', languages.map(function (l) { return 'copy:local_install_' + l; }));
+
     grunt.loadNpmTasks('grunt-contrib-copy');
 };
