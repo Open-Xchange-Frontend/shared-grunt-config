@@ -1,6 +1,6 @@
 {
-  "name": "open-xchange-shared-grunt-config",
-  "version": "0.15.0-pre4",
+  "name": "@open-xchange/shared-grunt-config",
+  "version": "0.15.0-pre5",
   "license": "MIT",
   "repository": {
     "type": "git",
