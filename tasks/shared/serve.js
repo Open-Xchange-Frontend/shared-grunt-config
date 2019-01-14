@@ -23,8 +23,8 @@ module.exports = function (grunt) {
 
     grunt.registerTask('serve', ['connect:server:keepalive']);
 
-    if (grunt.isPeerDependencyInstalled('appserver')) {
-        var appserver = require('appserver');
+    if (grunt.isPeerDependencyInstalled('@open-xchange/appserver')) {
+        var appserver = require('@open-xchange/appserver');
         var _ = require('underscore');
 
         grunt.config.merge({
