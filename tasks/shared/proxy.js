@@ -20,6 +20,8 @@ module.exports = function (grunt) {
         protocol = url.parse(proxyURL).protocol === 'https:' ? 'https' : 'http';
         protocolImpl = require(protocol);
         protocol += ':';
+    } else {
+        protocolImpl = require('http');
     }
 
     var appserverUrl;
