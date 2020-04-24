@@ -74,6 +74,21 @@ module.exports = function (grunt) {
                     //like GET, which are send when HTTP (no HTTPS) is proxied
                     function (request, response, next) {
                         var opt = require('url').parse(request.url);
+                        var host = request.headers.host.split(':')[0];
+                        var reqPort = request.headers.host.split(':')[1] || '80';
+                        var conf = grunt.config('local.appserver');
+                        var server = conf.server || '';
+                        var serverPort = (server.match(/:([0-9]+)\//) || [])[1] || '80';
+
+                        if (appserverUrl && conf && server.indexOf(host) >= 0) {
+                            opt.hostname = appserverUrl.hostname;
+                            if (reqPort !== serverPort) {
+                                opt.port = reqPort;
+                            } else {
+                                opt.port = appserverUrl.port;
+                            }
+                        }
+
                         opt.headers = request.headers;
                         opt.method = request.method;
 
