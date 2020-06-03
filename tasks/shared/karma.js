@@ -10,11 +10,9 @@
 
 module.exports = function (grunt) {
 
-    var _ = require('underscore');
-
     grunt.config.merge({
         karma: {
-            options: _.extend({
+            options: Object.assign({
                 configFile: 'karma.conf.js',
                 builddir: 'build/',
                 appserver: grunt.config('local.appserver'),

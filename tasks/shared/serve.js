@@ -25,7 +25,6 @@ module.exports = function (grunt) {
 
     if (grunt.isPeerDependencyInstalled('@open-xchange/appserver')) {
         var appserver = require('@open-xchange/appserver');
-        var _ = require('underscore');
 
         grunt.config.merge({
             connect: {
@@ -52,11 +51,11 @@ module.exports = function (grunt) {
                             config.prefixes = (config.prefixes || []).concat(options.base);
                             config.manifests = (config.manifests || []).concat(options.base + '/manifests/');
 
-                            config.prefixes = _.uniq(config.prefixes);
+                            config.prefixes = config.prefixes.filter(function (item, index) { return config.prefixes.indexOf(item) === index });
                             config.manifests = [].concat.apply(config.manifests, config.prefixes.map(function (prefix) {
                                 return prefix + '/manifests/';
                             }));
-                            config.manifests = _.uniq(config.manifests);
+                            config.manifests = config.manifests.filter(function (item, index) { return config.manifests.indexOf(item) === index });
 
                             config = appserver.tools.unifyOptions(config);
 

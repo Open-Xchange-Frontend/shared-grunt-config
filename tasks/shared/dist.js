@@ -31,9 +31,8 @@ module.exports = function (grunt) {
     }
 
     function isPackagedTranslationModule(file) {
-        var _ = require('underscore'),
-            languagePart = file.match(/\.([a-zA-Z]+_[a-zA-Z]+)\.js$/)[1];
-        return _(languages).contains(languagePart);
+        var languagePart = file.match(/\.([a-zA-Z]+_[a-zA-Z]+)\.js$/)[1];
+        return languages.includes(languagePart);
     }
 
     function isMinifiedJSFile(file) {

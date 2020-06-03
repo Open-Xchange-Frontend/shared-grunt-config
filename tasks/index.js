@@ -23,12 +23,12 @@ module.exports = function (grunt) {
 
     // make grunt config extendable
     grunt.config.extend = function (k, v) {
-        grunt.config(k, require('underscore').extend({}, grunt.config(k), v));
+        grunt.config(k, Object.assign({}, grunt.config(k), v));
     };
 
     grunt.config('pkg', grunt.file.readJSON('package.json'));
 
-    grunt.config('local', require('underscore').extend(
+    grunt.config('local', Object.assign(
         grunt.file.readJSON(path.join(path.dirname(__filename), 'local.conf.default.json')),
         grunt.file.exists('grunt/local.conf.json') ? grunt.file.readJSON('grunt/local.conf.json') : {}
     ));
