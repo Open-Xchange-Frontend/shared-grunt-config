@@ -74,7 +74,7 @@ module.exports = function (grunt) {
                             if (this.flags.mock === true) {
                                 middlewares.push(appserver.middleware.mockData(config));
                             }
-                            if (grunt.config().local.devProxy) {
+                            if (grunt.config('local.devProxy')) {
                                 middlewares.push(appserver.middleware.appsload(config));
                                 middlewares.push(appserver.middleware.localfiles(config));
                             } else {
