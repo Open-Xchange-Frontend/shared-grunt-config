@@ -28,6 +28,7 @@
     "grunt-require-gettext": ">=0.6.0"
   },
   "dependencies": {
-    "async": "^2.4.1"
+    "async": "^2.4.1",
+    "proxy-agent": "^6.2.1"
   }
 }
